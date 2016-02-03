@@ -78,8 +78,8 @@ export class CKEditor {
             }
 
         // Config object
-        }else if( this.config ){
-            config = this.config;
+        }else{
+            config = this.config || {};
             this.ckeditorInit( config );
         }
     }
