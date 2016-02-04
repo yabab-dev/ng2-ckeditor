@@ -5,7 +5,9 @@ Use the [CKEditor (4.x)](http://ckeditor.com/) wysiwyg in your Angular2 applicat
 ### <a name="install"></a>Installation
 
 - Include CKEditor javascript files in your application
-- Install ng2-ckeditor (for JSPM : ```jspm install ng2-ckeditor=github:chymz/ng2-ckeditor```)
+- Install ng2-ckeditor
+  - JSPM : ```jspm install ng2-ckeditor=github:chymz/ng2-ckeditor```
+  - NPM : ```npm install ng2-ckeditor```
 
 ### <a name="sample"></a>Sample (ES6)
 
@@ -29,8 +31,8 @@ export class Sample{
 
 * config : The configuration object for CKEditor see http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-fileTools_defaultFileName
 * configFile : You can use a javacsript file to configure your CKEditor (Only work with SystemJS)
-  ```javascript
-  export var config = {
+```javascript
+export var config = {
     uiColor: '#990000'
-  }
-  ```
+}
+```

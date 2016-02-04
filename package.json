@@ -1,6 +1,6 @@
 {
   "name": "ng2-ckeditor",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Angular2 CKEditor component",
   "main": "lib/CKEditor.js",
   "typings": "./CKEditor.d.ts",
