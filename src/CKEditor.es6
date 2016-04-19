@@ -8,7 +8,8 @@ import {
     ViewChild,
     Optional,
     OptionalMetadata,
-    EventEmitter
+    EventEmitter,
+    NgZone
 } from 'angular2/core';
 import {NgControl, ControlValueAccessor} from 'angular2/common';
 
@@ -19,8 +20,7 @@ import {NgControl, ControlValueAccessor} from 'angular2/common';
  */
 @Component({
     selector: 'ckeditor',
-    template: `<textarea #host></textarea>
-    <button (click)="hackUpdate($event)" #button></button>`,
+    template: `<textarea #host></textarea>`,
 })
 @Reflect.metadata('parameters', [null, [new OptionalMetadata()]])
 export class CKEditor {
@@ -35,18 +35,18 @@ export class CKEditor {
     value = '';
     instance = null;
     ngControl;
-
-    // Hack button
-    _buttonEl;
+    zone;
 
     /**
      * Constructor
      */
-    constructor(elementRef:ElementRef, ngControl:NgControl){
+    constructor(elementRef:ElementRef, ngControl:NgControl, zone:NgZone){
         if( ngControl ){
             ngControl.valueAccessor = this;
             this.ngControl = ngControl;
         }
+
+        this.zone = zone;
     }
 
     /**
@@ -91,37 +91,17 @@ export class CKEditor {
         // CKEditor replace textarea
         this.instance = CKEDITOR.replace( this.host._appElement.nativeElement, config );
 
-        // Hide hack button
-        this._buttonEl = this.button._appElement.nativeElement;
-        this._buttonEl.style.display = 'none';
-
         // Set initial value
         this.instance.setData(this.value);
 
         // Change event
         this.instance.on('change', () => {
-            var value = this.instance.getData();
-
-            // This doesn't work ???
-            /*this.onChange( value );
-            this.change.emit( value );
-            this.ngControl.viewToModelUpdate(value);*/
-
-            // Hack
-            this._buttonEl.dispatchEvent(new Event('click'))
+            this.zone.run(() => {
+                let value = this.instance.getData();
+                this.change.emit( value );
+                this.ngControl.viewToModelUpdate(value);
+            });
         });
-    }
-
-    /**
-     * Hack to update model
-     */
-    hackUpdate(){
-        if( this.instance ){
-            var value = this.instance.getData();
-            this.ngControl.viewToModelUpdate(value);
-            //this.onChange( value );
-            this.change.emit( value );
-        }
     }
 
     /**
