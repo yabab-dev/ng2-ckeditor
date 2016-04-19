@@ -12,7 +12,7 @@ export declare class CKEditor implements ControlValueAccessor {
 
     value:any;
     instance:any;
-    change:EventEmitter;
+    change:EventEmitter<any>;
 
     constructor(elementRef:ElementRef, ngControl:NgControl);
     ckeditorInit(config:any):void;
