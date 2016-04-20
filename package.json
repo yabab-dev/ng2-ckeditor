@@ -33,6 +33,6 @@
     "gulp": "~3.9.0",
     "gulp-babel": "~6.1.1",
     "gulp-cached": "~1.1.0",
-    "gulp-sourcemaps": "~2.0.0-alpha",
+    "gulp-sourcemaps": "~2.0.0-alpha"
   }
 }
