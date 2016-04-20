@@ -9,7 +9,7 @@ import {
     Optional,
     OptionalMetadata,
     EventEmitter,
-    NgZone
+    Renderer
 } from 'angular2/core';
 import {NgControl, ControlValueAccessor} from 'angular2/common';
 
@@ -20,33 +20,32 @@ import {NgControl, ControlValueAccessor} from 'angular2/common';
  */
 @Component({
     selector: 'ckeditor',
-    template: `<textarea #host></textarea>`,
+    template: `<textarea #host (change)="onValueChange($event)"></textarea>`,
 })
 @Reflect.metadata('parameters', [null, [new OptionalMetadata()]])
 export class CKEditor {
 
     @Input() config;
     @Input() configFile;
+    @Input() ngModel;
 
     @Output() change = new EventEmitter();
     @ViewChild('host') host;
-    @ViewChild('button') button;
 
     value = '';
-    instance = null;
+    instance;
     ngControl;
-    zone;
+    renderer;
 
     /**
      * Constructor
      */
-    constructor(elementRef:ElementRef, ngControl:NgControl, zone:NgZone){
+    constructor(elementRef:ElementRef, ngControl:NgControl, renderer:Renderer){
         if( ngControl ){
             ngControl.valueAccessor = this;
             this.ngControl = ngControl;
         }
-
-        this.zone = zone;
+        this.renderer = renderer;
     }
 
     /**
@@ -85,22 +84,34 @@ export class CKEditor {
     }
 
     /**
+     * Detect textarea value change
+     */
+    onValueChange(event){
+        var value = this.host.nativeElement.value;
+        this.change.emit( value );
+        this.ngControl.viewToModelUpdate( value );
+    }
+
+    /**
      * CKEditor init
      */
     ckeditorInit( config ){
+
+        if(!CKEDITOR){
+            console.error('Please include CKEditor in your page');
+            return;
+        }
+
         // CKEditor replace textarea
-        this.instance = CKEDITOR.replace( this.host._appElement.nativeElement, config );
+        this.instance = CKEDITOR.replace( this.host.nativeElement, config );
 
         // Set initial value
         this.instance.setData(this.value);
 
-        // Change event
+        // CKEditor change event
         this.instance.on('change', () => {
-            this.zone.run(() => {
-                let value = this.instance.getData();
-                this.change.emit( value );
-                this.ngControl.viewToModelUpdate(value);
-            });
+            this.renderer.setElementProperty(this.host.nativeElement, 'value', this.instance.getData());
+            this.renderer.invokeElementMethod(this.host.nativeElement, 'dispatchEvent', [new Event('change')]);
         });
     }
 

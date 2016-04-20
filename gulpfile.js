@@ -17,16 +17,7 @@ gulp.task('default', ['watch']);
 /**
  * Build all
  */
-gulp.task('build', ['babel', 'assets']);
-
-/**
- * Copy assets
- */
-gulp.task('assets', function(){
-    return gulp.src(paths.assets)
-        .pipe(cache('assets-dev'))
-        .pipe(gulp.dest(paths.dest));
-});
+gulp.task('build', ['babel', 'uglify']);
 
 /**
  * Babel transpile all sources
@@ -40,7 +31,7 @@ gulp.task('babel', function(){
             console.error(err.stack);
             this.emit('end');
         })
-        .pipe(sourcemaps.write())
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(paths.dest));
 });
 
@@ -48,5 +39,5 @@ gulp.task('babel', function(){
  * Babel watch
  */
 gulp.task('watch', function(){
-    return gulp.watch([paths.sources, paths.assets], ['babel', 'assets']);
+    return gulp.watch([paths.sources, paths.assets], ['babel']);
 });
