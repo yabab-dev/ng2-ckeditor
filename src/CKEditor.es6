@@ -10,8 +10,8 @@ import {
     OptionalMetadata,
     EventEmitter,
     Renderer
-} from 'angular2/core';
-import {NgControl, ControlValueAccessor} from 'angular2/common';
+} from '@angular/core';
+import {NgControl, ControlValueAccessor} from '@angular/common';
 
 /**
  * CKEditor component
