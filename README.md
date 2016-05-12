@@ -29,8 +29,9 @@ export class Sample{
 
 ### <a name="config"></a>Configuration
 
-* config : The configuration object for CKEditor see http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-fileTools_defaultFileName
-* configFile : You can use a javacsript file to configure your CKEditor (Only work with SystemJS)
+* config : The configuration object for CKEditor see http://docs.ckeditor.com/#!/api/CKEDITOR.config
+
+* ***[Deprecated : use file loader with your bundler]*** configFile : You can use a javacsript file to configure your CKEditor (Only work with SystemJS)
 ```javascript
 export var config = {
     uiColor: '#990000'

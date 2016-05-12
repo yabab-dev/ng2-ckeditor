@@ -5,8 +5,7 @@ var cache = require('gulp-cached');
 
 var paths = {
     dest: 'lib/',
-    sources: 'src/**/*.es6',
-    assets: 'src/**/!(*.es6)',
+    sources: 'src/**/*.es6'
 };
 
 /**
@@ -17,7 +16,7 @@ gulp.task('default', ['watch']);
 /**
  * Build all
  */
-gulp.task('build', ['babel', 'uglify']);
+gulp.task('build', ['babel']);
 
 /**
  * Babel transpile all sources
@@ -39,5 +38,5 @@ gulp.task('babel', function(){
  * Babel watch
  */
 gulp.task('watch', function(){
-    return gulp.watch([paths.sources, paths.assets], ['babel']);
+    return gulp.watch([paths.sources], ['babel']);
 });

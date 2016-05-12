@@ -16,12 +16,12 @@ export declare class CKEditor implements ControlValueAccessor {
 
     constructor(elementRef:ElementRef, ngControl:NgControl);
     ckeditorInit(config:any):void;
-    hackUpdate():void;
+    onValueChange(event:any);
 
     // ControlValueAccessor
     writeValue(value:any):void;
     onChange(_:any):void;
     registerOnChange(fn:Function):void;
     registerOnTouched(fn:Function):void;
-    
+
 }

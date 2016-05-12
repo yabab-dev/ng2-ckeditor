@@ -128,3 +128,58 @@ export class CKEditor {
     registerOnChange(fn){this.onChange = fn;}
     registerOnTouched(fn){this.onTouched = fn;}
 }
+
+/**
+ * CKEditor inline Directive
+ * @WIP
+ */
+// @Directive({
+//     selector: '[ckeditorInline]',
+// })
+// export class CKEditorInline{
+//
+//     @Input('ckeditorInline') config;
+//
+//     instance;
+//     el;
+//
+//     /**
+//      * Constructor
+//      */
+//     constructor(el: ElementRef) {
+//         this.el = el;
+//     }
+//
+//     /**
+//      * On component view init
+//      */
+//     ngAfterViewInit(){
+//         var config = this.config || {};
+//         //this.ckeditorInit( config );
+//     }
+//
+//     /**
+//      * On component destroy
+//      */
+//     ngOnDestroy(){
+//         if( this.instance ) {
+//             this.instance.removeAllListeners();
+//             this.instance.destroy();
+//             this.instance = null;
+//         }
+//     }
+//
+//     /**
+//      * CKEditor init
+//      */
+//     ckeditorInit( config ){
+//         if(!CKEDITOR){
+//             console.error('Please include CKEditor in your page');
+//             return;
+//         }
+//
+//         CKEDITOR.disableAutoInline = true;
+//         this.instance = CKEDITOR.inline(this.el);
+//     }
+//
+// }
