@@ -12,7 +12,7 @@ Use the [CKEditor (4.x)](http://ckeditor.com/) wysiwyg in your Angular2 applicat
 ### <a name="sample"></a>Sample (ES6)
 
 ```javascript
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 import {CKEditor} from 'ng2-ckeditor';
 
 @Component({

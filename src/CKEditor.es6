@@ -7,7 +7,6 @@ import {
     ElementRef,
     ViewChild,
     Optional,
-    OptionalMetadata,
     EventEmitter,
     Renderer
 } from '@angular/core';
@@ -16,13 +15,12 @@ import {NgControl, ControlValueAccessor} from '@angular/common';
 /**
  * CKEditor component
  * Usage :
- * <ckeditor [(ngModel)]="data" [config]="{...}" configFile="file.js"></ckeditor>
+ * <ckeditor [(ngModel)]="data" [config]="{...}"></ckeditor>
  */
 @Component({
     selector: 'ckeditor',
     template: `<textarea #host (change)="onValueChange($event)"></textarea>`,
 })
-@Reflect.metadata('parameters', [null, [new OptionalMetadata()]])
 export class CKEditor {
 
     @Input() config;
@@ -40,7 +38,7 @@ export class CKEditor {
     /**
      * Constructor
      */
-    constructor(elementRef:ElementRef, ngControl:NgControl, renderer:Renderer){
+    constructor(elementRef:ElementRef, @Optional() ngControl:NgControl, renderer:Renderer){
         if( ngControl ){
             ngControl.valueAccessor = this;
             this.ngControl = ngControl;
@@ -89,7 +87,8 @@ export class CKEditor {
     onValueChange(event){
         var value = this.host.nativeElement.value;
         this.change.emit( value );
-        this.ngControl.viewToModelUpdate( value );
+        if (this.ngControl)
+            this.ngControl.viewToModelUpdate( value );
     }
 
     /**
