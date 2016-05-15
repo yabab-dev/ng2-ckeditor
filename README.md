@@ -27,6 +27,10 @@ export class Sample{
 }
 ```
 
+Other samples :
+- [ES2016 and JSPM](https://github.com/chymz/angular2-jspm-seed/tree/ng2-ckeditor)
+- [TypeScript and Webpack](https://github.com/chymz/angular2-seed/tree/ng2-ckeditor)
+
 ### <a name="config"></a>Configuration
 
 * config : The configuration object for CKEditor see http://docs.ckeditor.com/#!/api/CKEDITOR.config
