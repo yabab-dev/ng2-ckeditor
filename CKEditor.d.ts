@@ -16,7 +16,7 @@ export declare class CKEditor implements ControlValueAccessor {
 
     constructor(elementRef:ElementRef, ngControl:NgControl);
     ckeditorInit(config:any):void;
-    onValueChange(event:any);
+    onValueChange(event:any):void;
 
     // ControlValueAccessor
     writeValue(value:any):void;
