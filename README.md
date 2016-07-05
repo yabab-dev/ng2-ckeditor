@@ -35,8 +35,9 @@ export class Sample{
 ```
 
 Other samples :
-- [ES2016 and JSPM](https://github.com/chymz/angular2-jspm-seed/tree/ng2-ckeditor)
-- [TypeScript and Webpack](https://github.com/chymz/angular2-seed/tree/ng2-ckeditor)
+- ES2016 and JSPM : https://github.com/chymz/angular2-jspm-seed/tree/ng2-ckeditor
+- TypeScript with cli : https://github.com/chymz/ng2-cli-ckeditor-sample
+- TypeScript and Webpack : https://github.com/chymz/angular2-seed/tree/ng2-ckeditor **(Outdated)**
 
 ### <a name="config"></a>Configuration
 
