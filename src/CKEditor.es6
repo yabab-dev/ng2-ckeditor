@@ -1,7 +1,6 @@
 // Imports
 import {
   Component,
-  Directive,
   Input,
   Output,
   ElementRef,
@@ -10,13 +9,13 @@ import {
   EventEmitter,
   NgZone
 } from '@angular/core';
-import {NgControl, ControlValueAccessor} from '@angular/forms';
+import {NgControl} from '@angular/forms';
 
 /**
-* CKEditor component
-* Usage :
-* <ckeditor [(ngModel)]="data" [config]="{...}" debounce="500"></ckeditor>
-*/
+ * CKEditor component
+ * Usage :
+ *  <ckeditor [(ngModel)]="data" [config]="{...}" debounce="500"></ckeditor>
+ */
 @Component({
   selector: 'ckeditor',
   template: `<textarea #host></textarea>`,
@@ -37,9 +36,9 @@ export class CKEditor {
   zone;
 
   /**
-  * Constructor
-  */
-  constructor(elementRef:ElementRef, @Optional() ngControl:NgControl, zone:NgZone){
+   * Constructor
+   */
+  constructor(elementRef:ElementRef, zone:NgZone, @Optional() ngControl:NgControl){
     if (ngControl) {
       ngControl.valueAccessor = this;
       this.ngControl = ngControl;
@@ -48,8 +47,8 @@ export class CKEditor {
   }
 
   /**
-  * On component destroy
-  */
+   * On component destroy
+   */
   ngOnDestroy(){
     if (this.instance) {
       this.instance.removeAllListeners();
@@ -59,8 +58,8 @@ export class CKEditor {
   }
 
   /**
-  * On component view init
-  */
+   * On component view init
+   */
   ngAfterViewInit(){
     // Configuration
     var config = this.config || {};
@@ -68,21 +67,21 @@ export class CKEditor {
   }
 
   /**
-  * Value change process
-  */
+   * Value change process
+   */
   onValueChange(value){
     this.zone.run(() => {
       this.change.emit(value);
-      if (this.ngControl)
-      this.ngControl.viewToModelUpdate(value);
+      if (this.ngControl) {
+        this.ngControl.viewToModelUpdate(value);
+      }
     });
   }
 
   /**
-  * CKEditor init
-  */
-  ckeditorInit( config ){
-
+   * CKEditor init
+   */
+  ckeditorInit(config){
     if (!CKEDITOR) {
       console.error('Please include CKEditor in your page');
       return;
@@ -114,12 +113,12 @@ export class CKEditor {
   }
 
   /**
-  * Implements ControlValueAccessor
-  */
+   * Implements ControlValueAccessor
+   */
   writeValue(value){
     this.value = value;
     if (this.instance)
-    this.instance.setData(value);
+      this.instance.setData(value);
   }
   onChange(_){}
   onTouched(){}
