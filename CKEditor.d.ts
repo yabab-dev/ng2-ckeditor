@@ -1,22 +1,23 @@
 // Imports
 import {
     ElementRef,
-    EventEmitter
+    EventEmitter,
+    NgZone
 } from '@angular/core';
-import {NgControl, ControlValueAccessor} from '@angular/forms';
+import {ControlValueAccessor} from '@angular/forms';
 
 /**
  * CKEditor component
  */
 export declare class CKEditor implements ControlValueAccessor {
 
-    value:any;
+    value:String;
     instance:any;
     change:EventEmitter<any>;
 
-    constructor(elementRef:ElementRef, ngControl:NgControl);
+    constructor(elementRef:ElementRef, zone:NgZone);
     ckeditorInit(config:any):void;
-    onValueChange(value:String):void;
+    updateValue(value:String):void;
 
     // ControlValueAccessor
     writeValue(value:any):void;

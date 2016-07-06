@@ -7,9 +7,21 @@ import {
   ViewChild,
   Optional,
   EventEmitter,
-  NgZone
+  NgZone,
+  Provider,
+  forwardRef,
+  Renderer
 } from '@angular/core';
-import {NgControl} from '@angular/forms';
+import {NgControl, NG_VALUE_ACCESSOR} from '@angular/forms';
+
+// Control Value accessor provider
+const CKEDITOR_CONTROL_VALUE_ACCESSOR = new Provider(
+  NG_VALUE_ACCESSOR,
+  {
+    useExisting: forwardRef(() => CKEditor),
+    multi: true
+  }
+);
 
 /**
  * CKEditor component
@@ -18,6 +30,7 @@ import {NgControl} from '@angular/forms';
  */
 @Component({
   selector: 'ckeditor',
+  providers: [CKEDITOR_CONTROL_VALUE_ACCESSOR],
   template: `<textarea #host></textarea>`,
 })
 export class CKEditor {
@@ -28,22 +41,24 @@ export class CKEditor {
   @Output() change = new EventEmitter();
   @ViewChild('host') host;
 
-  value = '';
+  _value = '';
   instance;
-  ngControl;
-  renderer;
   debounceTimeout;
   zone;
 
   /**
    * Constructor
    */
-  constructor(elementRef:ElementRef, zone:NgZone, @Optional() ngControl:NgControl){
-    if (ngControl) {
-      ngControl.valueAccessor = this;
-      this.ngControl = ngControl;
-    }
+  constructor(elementRef:ElementRef, zone:NgZone){
     this.zone = zone;
+  }
+
+  get value(): any { return this._value; };
+  @Input() set value(v) {
+    if (v !== this._value) {
+      this._value = v;
+      this._onChangeCallback(v);
+    }
   }
 
   /**
@@ -67,14 +82,16 @@ export class CKEditor {
   }
 
   /**
-   * Value change process
+   * Value update process
    */
-  onValueChange(value){
+  updateValue(value){
     this.zone.run(() => {
+      this.value = value;
+
+      this.onChange(value);
+
+      this._onTouchedCallback();
       this.change.emit(value);
-      if (this.ngControl) {
-        this.ngControl.viewToModelUpdate(value);
-      }
     });
   }
 
@@ -95,19 +112,20 @@ export class CKEditor {
 
     // CKEditor change event
     this.instance.on('change', () => {
+      this._onTouchedCallback();
       let value = this.instance.getData();
 
       // Debounce update
       if (this.debounce) {
         if(this.debounceTimeout) clearTimeout(this.debounceTimeout);
         this.debounceTimeout = setTimeout(() => {
-          this.onValueChange(value);
+          this.updateValue(value);
           this.debounceTimeout = null;
         }, parseInt(this.debounce));
 
       // Live update
       }else{
-        this.onValueChange(value);
+        this.updateValue(value);
       }
     });
   }
@@ -116,7 +134,7 @@ export class CKEditor {
    * Implements ControlValueAccessor
    */
   writeValue(value){
-    this.value = value;
+    this._value = value;
     if (this.instance)
       this.instance.setData(value);
   }
@@ -124,4 +142,6 @@ export class CKEditor {
   onTouched(){}
   registerOnChange(fn){this.onChange = fn;}
   registerOnTouched(fn){this.onTouched = fn;}
+  _onChangeCallback(_){}
+  _onTouchedCallback(){}
 }

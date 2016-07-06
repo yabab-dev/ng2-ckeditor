@@ -1,6 +1,7 @@
 # Angular2 - CKEditor component
 
 Use the [CKEditor (4.x)](http://ckeditor.com/) wysiwyg in your Angular2 application.
+(Works with new forms API / Angular rc4)
 
 ### <a name="install"></a>Installation
 
@@ -43,3 +44,9 @@ Other samples :
 
 * `config` : The configuration object for CKEditor see http://docs.ckeditor.com/#!/api/CKEDITOR.config
 * `debounce` : You can add a delay (ms) when updating ngModel
+
+### <a name="todo"></a>Todo
+- Plunker sample
+
+### <a name="licence"></a>Licence
+See `LICENCE` file
