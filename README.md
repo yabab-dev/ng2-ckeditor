@@ -38,15 +38,13 @@ export class Sample{
 Other samples :
 - ES2016 and JSPM : https://github.com/chymz/angular2-jspm-seed/tree/ng2-ckeditor
 - TypeScript with cli : https://github.com/chymz/ng2-cli-ckeditor-sample
+- Plunker sample : https://embed.plnkr.co/hnB0R3/ 
 - TypeScript and Webpack : https://github.com/chymz/angular2-seed/tree/ng2-ckeditor **(Outdated)**
 
 ### <a name="config"></a>Configuration
 
 * `config` : The configuration object for CKEditor see http://docs.ckeditor.com/#!/api/CKEDITOR.config
 * `debounce` : You can add a delay (ms) when updating ngModel
-
-### <a name="todo"></a>Todo
-- Plunker sample
 
 ### <a name="licence"></a>Licence
 See `LICENCE` file
