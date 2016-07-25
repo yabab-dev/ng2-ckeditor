@@ -12,7 +12,7 @@ import {
   forwardRef,
   Renderer
 } from '@angular/core';
-import {NgControl, NG_VALUE_ACCESSOR} from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 // Control Value accessor provider
 const CKEDITOR_CONTROL_VALUE_ACCESSOR = new Provider(
@@ -49,7 +49,7 @@ export class CKEditor {
   /**
    * Constructor
    */
-  constructor(elementRef:ElementRef, zone:NgZone){
+  constructor(zone:NgZone){
     this.zone = zone;
   }
 
@@ -90,7 +90,7 @@ export class CKEditor {
 
       this.onChange(value);
 
-      this._onTouchedCallback();
+      this.onTouched();
       this.change.emit(value);
     });
   }
@@ -112,7 +112,7 @@ export class CKEditor {
 
     // CKEditor change event
     this.instance.on('change', () => {
-      this._onTouchedCallback();
+      this.onTouched();
       let value = this.instance.getData();
 
       // Debounce update
@@ -142,6 +142,4 @@ export class CKEditor {
   onTouched(){}
   registerOnChange(fn){this.onChange = fn;}
   registerOnTouched(fn){this.onTouched = fn;}
-  _onChangeCallback(_){}
-  _onTouchedCallback(){}
 }

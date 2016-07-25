@@ -11,7 +11,7 @@ Use the [CKEditor (4.x)](http://ckeditor.com/) wysiwyg in your Angular2 applicat
   - JSPM/NPM : ```jspm install npm:ng2-ckeditor```
   - NPM : ```npm install ng2-ckeditor```
 
-### <a name="sample"></a>Sample (ES6)
+### <a name="sample"></a>Sample (ES2016+)
 
 ```javascript
 import {Component} from '@angular/core';
