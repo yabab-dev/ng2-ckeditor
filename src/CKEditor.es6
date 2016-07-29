@@ -58,7 +58,7 @@ export class CKEditor {
   @Input() set value(v) {
     if (v !== this._value) {
       this._value = v;
-      this._onChangeCallback(v);
+      this.onChange(v);
     }
   }
 
