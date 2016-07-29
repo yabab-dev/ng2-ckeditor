@@ -13,6 +13,7 @@ export declare class CKEditor implements ControlValueAccessor {
   value:String;
   instance:any;
   change:EventEmitter<any>;
+  ready:EventEmitter<any>;
 
   constructor(zone:NgZone);
   ckeditorInit(config:any):void;
