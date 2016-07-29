@@ -24,6 +24,8 @@ import {CKEditor} from 'ng2-ckeditor';
   <ckeditor
     [(ngModel)]="ckeditorContent"
     [config]="{uiColor: '#99000'}"
+    (change)="onChange($event)"
+    (ready)="onReady($event)"
     debounce="500">
   </ckeditor>
   `
