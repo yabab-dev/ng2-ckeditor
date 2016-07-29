@@ -39,6 +39,7 @@ export class CKEditor {
   @Input() debounce;
 
   @Output() change = new EventEmitter();
+  @Output() ready = new EventEmitter();
   @ViewChild('host') host;
 
   _value = '';
@@ -57,7 +58,7 @@ export class CKEditor {
   @Input() set value(v) {
     if (v !== this._value) {
       this._value = v;
-      this._onChangeCallback(v);
+      this.onChange(v);
     }
   }
 
@@ -109,6 +110,12 @@ export class CKEditor {
 
     // Set initial value
     this.instance.setData(this.value);
+
+    // listen for instanceReady event
+    this.instance.on('instanceReady', (evt) => {
+      // send the evt to the EventEmitter
+      this.ready.emit(evt);
+    });
 
     // CKEditor change event
     this.instance.on('change', () => {
