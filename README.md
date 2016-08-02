@@ -48,5 +48,9 @@ Other samples :
 * `config` : The configuration object for CKEditor see http://docs.ckeditor.com/#!/api/CKEDITOR.config
 * `debounce` : You can add a delay (ms) when updating ngModel
 
+### <a name="issues"></a>Issues
+- [with ngFor](https://github.com/chymz/ng2-ckeditor/issues/23)
+- [[CKEDITOR] Error code: editor-destroy-iframe](https://github.com/chymz/ng2-ckeditor/issues/24)
+
 ### <a name="licence"></a>Licence
 See `LICENCE` file
