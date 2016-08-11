@@ -67,9 +67,11 @@ export class CKEditor {
    */
   ngOnDestroy(){
     if (this.instance) {
-      this.instance.removeAllListeners();
-      this.instance.destroy();
-      this.instance = null;
+      setTimeout(() => {
+        this.instance.removeAllListeners();
+        this.instance.destroy();
+        this.instance = null;
+      });
     }
   }
 
