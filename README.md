@@ -1,7 +1,7 @@
 # Angular2 - CKEditor component
 
 Use the [CKEditor (4.x)](http://ckeditor.com/) wysiwyg in your Angular2 application.
-(Works with new forms API / Angular rc4)
+(Works with RC6)
 
 ### <a name="install"></a>Installation
 
@@ -13,13 +13,28 @@ Use the [CKEditor (4.x)](http://ckeditor.com/) wysiwyg in your Angular2 applicat
 
 ### <a name="sample"></a>Sample (ES2016+)
 
+Include `CKEditorModule` in your main module :
+
+```javascript
+import {CKEditorModule} from 'ng2-ckeditor';
+
+@NgModule({
+  // ...
+  imports:      [
+    CKEditorModule
+  ],
+  // ...
+})
+export class AppModule { }
+```
+
+The use it in your component :
+
 ```javascript
 import {Component} from '@angular/core';
-import {CKEditor} from 'ng2-ckeditor';
 
 @Component({
   selector: 'sample',
-  directives: [CKEditor],
   template: `
   <ckeditor
     [(ngModel)]="ckeditorContent"
@@ -40,8 +55,7 @@ export class Sample{
 Other samples :
 - ES2016 and JSPM : https://github.com/chymz/angular2-jspm-seed/tree/ng2-ckeditor
 - TypeScript with cli : https://github.com/chymz/ng2-cli-ckeditor-sample
-- Plunker sample : https://embed.plnkr.co/hnB0R3/ 
-- TypeScript and Webpack : https://github.com/chymz/angular2-seed/tree/ng2-ckeditor **(Outdated)**
+- Plunker sample : https://embed.plnkr.co/hnB0R3/
 
 ### <a name="config"></a>Configuration
 

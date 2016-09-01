@@ -8,7 +8,7 @@ import { ControlValueAccessor } from '@angular/forms';
 /**
  * CKEditor component
  */
-export declare class CKEditor implements ControlValueAccessor {
+export declare class CKEditorComponent implements ControlValueAccessor {
 
   value:String;
   instance:any;
@@ -27,3 +27,8 @@ export declare class CKEditor implements ControlValueAccessor {
   registerOnTouched(fn:Function):void;
 
 }
+
+/**
+ * CKEditor module
+ */
+export declare class CKEditorModule {}

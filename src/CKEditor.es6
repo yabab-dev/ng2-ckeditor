@@ -8,20 +8,11 @@ import {
   Optional,
   EventEmitter,
   NgZone,
-  Provider,
   forwardRef,
-  Renderer
+  Renderer,
+  NgModule,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-
-// Control Value accessor provider
-const CKEDITOR_CONTROL_VALUE_ACCESSOR = new Provider(
-  NG_VALUE_ACCESSOR,
-  {
-    useExisting: forwardRef(() => CKEditor),
-    multi: true
-  }
-);
 
 /**
  * CKEditor component
@@ -30,10 +21,16 @@ const CKEDITOR_CONTROL_VALUE_ACCESSOR = new Provider(
  */
 @Component({
   selector: 'ckeditor',
-  providers: [CKEDITOR_CONTROL_VALUE_ACCESSOR],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => CKEditorComponent),
+      multi: true
+    }
+  ],
   template: `<textarea #host></textarea>`,
 })
-export class CKEditor {
+export class CKEditorComponent {
 
   @Input() config;
   @Input() debounce;
@@ -152,3 +149,16 @@ export class CKEditor {
   registerOnChange(fn){this.onChange = fn;}
   registerOnTouched(fn){this.onTouched = fn;}
 }
+
+/**
+ * CKEditorModule
+ */
+@NgModule({
+  declarations: [
+    CKEditorComponent,
+  ],
+  exports: [
+    CKEditorComponent,
+  ]
+})
+export class CKEditorModule{}
