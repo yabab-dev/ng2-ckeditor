@@ -17,7 +17,7 @@ Use the [CKEditor (4.x)](http://ckeditor.com/) wysiwyg in your Angular2 applicat
 
 - SystemJS Config :
 ```javascript
-  SystemJS.config({
+  System.config({
     "map": {
       "ng2-ckeditor": "npm:ng2-ckeditor",
     },
