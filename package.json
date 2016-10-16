@@ -1,11 +1,10 @@
 {
   "name": "ng2-ckeditor",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "description": "Angular2 CKEditor component",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "postinstall": "npm run build",
     "build": "node_modules/.bin/tsc",
     "build:aot": "node_modules/.bin/ngc -p tsconfig-aot.json"
   },
@@ -35,7 +34,9 @@
     "typescript": "^2.0.3"
   },
   "dependencies": {
+    "@angular/common": "^2.1.0",
     "@angular/core": "^2.1.0",
-    "@angular/forms": "^2.1.0"
+    "@angular/forms": "^2.1.0",
+    "zone.js": "^0.6.25"
   }
 }
