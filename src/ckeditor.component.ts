@@ -36,6 +36,7 @@ export class CKEditorComponent {
 
   @Output() change = new EventEmitter();
   @Output() ready = new EventEmitter();
+  @Output() blur = new EventEmitter();
   @ViewChild('host') host;
 
   _value = '';
@@ -131,6 +132,11 @@ export class CKEditorComponent {
       }else {
         this.updateValue(value);
       }
+    });
+
+    // CKEditor blur event
+    this.instance.on('blur', (evt) => {
+      this.blur.emit(evt);
     });
   }
 

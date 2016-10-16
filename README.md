@@ -57,6 +57,7 @@ import {Component} from '@angular/core';
     [config]="{uiColor: '#99000'}"
     (change)="onChange($event)"
     (ready)="onReady($event)"
+    (blur)="onBlur($event)"
     debounce="500">
   </ckeditor>
   `
