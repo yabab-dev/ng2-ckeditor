@@ -18,5 +18,10 @@
   "exclude": [
     "node_modules",
     "**/*.spec.ts"
-  ]
+  ],
+
+  "angularCompilerOptions": {
+    "genDir": "aot",
+    "skipMetadataEmit" : false
+  }
 }

@@ -2,6 +2,8 @@
 
 Use the [CKEditor (4.x)](http://ckeditor.com/) wysiwyg in your Angular2 application.
 
+**Demo** : https://embed.plnkr.co/hnB0R3/
+
 ### <a name="install"></a>Installation
 
 - Include CKEditor javascript files in your application :
@@ -10,29 +12,32 @@ Use the [CKEditor (4.x)](http://ckeditor.com/) wysiwyg in your Angular2 applicat
 ```
 
 - Install ng2-ckeditor
-  - JSPM/Github : ```jspm install ng2-ckeditor=github:chymz/ng2-ckeditor```
-  - JSPM/NPM : ```jspm install npm:ng2-ckeditor```
+  - JSPM : ```jspm install npm:ng2-ckeditor```
   - NPM : ```npm install ng2-ckeditor```
-
 
 - SystemJS Config :
 ```javascript
   SystemJS.config({
+    "map": {
+      "ng2-ckeditor": "npm:ng2-ckeditor",
+    },
     "packages": {
       "ng2-ckeditor": {
         "main": "lib/index.js",
         "defaultExtension": "js",
       },
     }
-  })
+  });
 ```
+
+- Please consider usage of the plugin `divarea` of CKEditor (see [Issues](#issues))
 
 ### <a name="sample"></a>Sample
 
 Include `CKEditorModule` in your main module :
 
 ```javascript
-import {CKEditorModule} from 'ng2-ckeditor';
+import { CKEditorModule } from 'ng2-ckeditor';
 
 @NgModule({
   // ...
@@ -47,7 +52,7 @@ export class AppModule { }
 Then use it in your component :
 
 ```javascript
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'sample',
@@ -68,8 +73,6 @@ export class Sample{
   }
 }
 ```
-
-Plunker : https://embed.plnkr.co/hnB0R3/
 
 ### <a name="config"></a>Configuration
 

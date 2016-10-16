@@ -6,7 +6,8 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "postinstall": "npm run build",
-    "build": "node_modules/.bin/tsc"
+    "build": "node_modules/.bin/tsc",
+    "build:aot": "node_modules/.bin/ngc -p tsconfig-aot.json"
   },
   "keywords": [
     "angular",
@@ -26,6 +27,8 @@
   },
   "homepage": "https://github.com/chymz/ng2-ckeditor#readme",
   "devDependencies": {
+    "@angular/compiler-cli": "^2.1.0",
+    "@angular/platform-server": "^2.1.0",
     "@types/ckeditor": "0.0.33",
     "@types/core-js": "^0.9.34",
     "@types/node": "^6.0.45",
