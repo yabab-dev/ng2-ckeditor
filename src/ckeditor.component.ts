@@ -107,7 +107,6 @@ export class CKEditorComponent {
     // CKEditor replace textarea
     this.instance = CKEDITOR.replace(this.host.nativeElement, config);
 
-    CKEDITOR.focusManager._.blurDelay = 0; // from 200 the default
     // Set initial value
     this.instance.setData(this.value);
 
