@@ -1,2 +1,2 @@
-export * from './ckeditor.module';
-export * from './ckeditor.component';
+export { CKEditorModule } from './ckeditor.module';
+export { CKEditorComponent } from './ckeditor.component';
