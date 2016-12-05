@@ -99,13 +99,15 @@ export class CKEditorComponent {
    * CKEditor init
    */
   ckeditorInit(config) {
-    if (!CKEDITOR) {
+    if (typeof CKEDITOR === 'undefined') {
       console.error('Please include CKEditor in your page');
       return;
     }
 
     // CKEditor replace textarea
-    this.instance = CKEDITOR.replace(this.host.nativeElement, config);
+    if (typeof CKEDITOR !== 'undefined') {
+       this.instance = CKEDITOR.replace(this.host.nativeElement, config);
+    }
 
     // Set initial value
     this.instance.setData(this.value);
