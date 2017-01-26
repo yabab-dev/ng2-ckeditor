@@ -85,4 +85,4 @@ export class Sample{
 - [[CKEDITOR] Error code: editor-destroy-iframe](https://github.com/chymz/ng2-ckeditor/issues/24)
 
 ### <a name="licence"></a>Licence
-See `LICENCE` file
+See `LICENSE` file

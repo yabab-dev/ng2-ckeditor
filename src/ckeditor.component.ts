@@ -13,6 +13,8 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
+declare var CKEDITOR:any;
+
 /**
  * CKEditor component
  * Usage :
@@ -99,51 +101,51 @@ export class CKEditorComponent {
    * CKEditor init
    */
   ckeditorInit(config) {
-    if (!CKEDITOR) {
-      console.error('Please include CKEditor in your page');
-      return;
-    }
+    if (typeof CKEDITOR == 'undefined') {
+      console.warn('CKEditor 4.x is missing (http://ckeditor.com/)');
 
-    // CKEditor replace textarea
-    this.instance = CKEDITOR.replace(this.host.nativeElement, config);
+    } else {
+      // CKEditor replace textarea
+      this.instance = CKEDITOR.replace(this.host.nativeElement, config);
 
-    // Set initial value
-    this.instance.setData(this.value);
+      // Set initial value
+      this.instance.setData(this.value);
 
-    // listen for instanceReady event
-    this.instance.on('instanceReady', (evt) => {
-      // send the evt to the EventEmitter
-      this.ready.emit(evt);
-    });
+      // listen for instanceReady event
+      this.instance.on('instanceReady', (evt) => {
+        // send the evt to the EventEmitter
+        this.ready.emit(evt);
+      });
 
-    // CKEditor change event
-    this.instance.on('change', () => {
-      this.onTouched();
-      let value = this.instance.getData();
+      // CKEditor change event
+      this.instance.on('change', () => {
+        this.onTouched();
+        let value = this.instance.getData();
 
-      // Debounce update
-      if (this.debounce) {
-        if (this.debounceTimeout) clearTimeout(this.debounceTimeout);
-        this.debounceTimeout = setTimeout(() => {
+        // Debounce update
+        if (this.debounce) {
+          if (this.debounceTimeout) clearTimeout(this.debounceTimeout);
+          this.debounceTimeout = setTimeout(() => {
+            this.updateValue(value);
+            this.debounceTimeout = null;
+          }, parseInt(this.debounce));
+
+        // Live update
+        }else {
           this.updateValue(value);
-          this.debounceTimeout = null;
-        }, parseInt(this.debounce));
+        }
+      });
 
-      // Live update
-      }else {
-        this.updateValue(value);
-      }
-    });
+      // CKEditor blur event
+      this.instance.on('blur', (evt) => {
+        this.blur.emit(evt);
+      });
 
-    // CKEditor blur event
-    this.instance.on('blur', (evt) => {
-      this.blur.emit(evt);
-    });
-
-    // CKEditor focus event
-    this.instance.on('focus', (evt) => {
-      this.focus.emit(evt);
-    });
+      // CKEditor focus event
+      this.instance.on('focus', (evt) => {
+        this.focus.emit(evt);
+      });
+    }
   }
 
   /**
