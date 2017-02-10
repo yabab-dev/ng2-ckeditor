@@ -1,24 +1,23 @@
 // Imports
 import {
   Component,
+  OnDestroy,
   Input,
   Output,
-  ElementRef,
   ViewChild,
-  Optional,
   EventEmitter,
   NgZone,
   forwardRef,
-  Renderer,
-} from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+  AfterViewInit
+} from "@angular/core";
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from "@angular/forms";
 
 declare var CKEDITOR:any;
 
 /**
  * CKEditor component
  * Usage :
- *  <ckeditor [(ngModel)]="data" [config]="{...}" debounce="500"></ckeditor>
+ *  <ckeditor [(ngModel)]="data" [config]="{...}" [events]="{...}" debounce="500"></ckeditor>
  */
 @Component({
   selector: 'ckeditor',
@@ -31,9 +30,10 @@ declare var CKEDITOR:any;
   ],
   template: `<textarea #host></textarea>`,
 })
-export class CKEditorComponent {
+export class CKEditorComponent implements AfterViewInit, OnDestroy, ControlValueAccessor {
 
   @Input() config;
+  @Input() events;
   @Input() debounce;
 
   @Output() change = new EventEmitter();
@@ -80,7 +80,7 @@ export class CKEditorComponent {
    */
   ngAfterViewInit() {
     // Configuration
-    this.ckeditorInit(this.config || {});
+    this.ckeditorInit(this.config || {}, this.events || {});
   }
 
   /**
@@ -100,7 +100,7 @@ export class CKEditorComponent {
   /**
    * CKEditor init
    */
-  ckeditorInit(config) {
+  ckeditorInit(config, events) {
     if (typeof CKEDITOR == 'undefined') {
       console.warn('CKEditor 4.x is missing (http://ckeditor.com/)');
 
@@ -145,6 +145,11 @@ export class CKEditorComponent {
       this.instance.on('focus', (evt) => {
         this.focus.emit(evt);
       });
+
+      // Register custom events passed to component
+      for(var event in events) {
+        this.instance.on(event, events[event]);
+      }
     }
   }
 
