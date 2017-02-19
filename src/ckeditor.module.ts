@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CKEditorComponent } from './ckeditor.component';
+import { CKButtonDirective } from './ckbutton.directive';
+import { CKGroupDirective } from './ckgroup.directive';
 
 /**
  * CKEditorModule
@@ -11,10 +13,10 @@ import { CKEditorComponent } from './ckeditor.component';
     CommonModule
   ],
   declarations: [
-    CKEditorComponent,
+    CKEditorComponent,CKButtonDirective,CKGroupDirective
   ],
   exports: [
-    CKEditorComponent,
+    CKEditorComponent,CKButtonDirective,CKGroupDirective
   ]
 })
 export class CKEditorModule { }
