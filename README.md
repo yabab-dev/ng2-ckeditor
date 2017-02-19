@@ -82,7 +82,8 @@ export class Sample{
 
 ### <a name="toolbar"></a>Toolbar Directives
 
-You can use the following directives to add custom buttons to CKEditor's toolbar and organize them into groups:
+You can use the following directives to add custom buttons to CKEditor's toolbar and organize them into groups.
+For more info about CKEditor's Toolbar API refer to http://docs.ckeditor.com/#!/api/CKEDITOR.ui
 
 * `<ckbutton>` : Note that the `name` and `command` attributes are mandatory for this one.
 ```javascript
