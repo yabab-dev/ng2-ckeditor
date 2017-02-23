@@ -80,6 +80,39 @@ export class Sample{
 * `config` : The configuration object for CKEditor see http://docs.ckeditor.com/#!/api/CKEDITOR.config
 * `debounce` : You can add a delay (ms) when updating ngModel
 
+### <a name="toolbar"></a>Toolbar Directives
+
+You can use the following directives to add custom buttons to CKEditor's toolbar and organize them into groups.
+For more info about CKEditor's Toolbar API refer to http://docs.ckeditor.com/#!/api/CKEDITOR.ui
+
+* `<ckbutton>` : Note that the `name` and `command` attributes are mandatory for this one.
+```javascript
+<ckeditor
+  [(ngModel)]="ckeditorContent">
+    <ckbutton [name]="'saveButton'"
+      [command]="'saveCmd'"
+      (click)="save($event)"
+      [icon]="'save.png'"
+      [label]="'Save Document'"
+      [toolbar]="'clipboard,1'">
+    </ckbutton>
+</ckeditor>
+```
+
+* `<ckgroup>` : Can be used to organize multiple buttons into groups.
+
+```javascript
+<ckeditor
+  [(ngModel)]="ckeditorContent">
+    <ckgroup
+      [name]="'documenthandling'"
+      [previous]="'1'">
+        <ckbutton .... ></ckbutton>
+        <ckbutton .... ></ckbutton>
+    </ckgroup>
+</ckeditor>
+```
+
 ### <a name="issues"></a>Issues
 - [with ngFor](https://github.com/chymz/ng2-ckeditor/issues/23)
 - [[CKEDITOR] Error code: editor-destroy-iframe](https://github.com/chymz/ng2-ckeditor/issues/24)

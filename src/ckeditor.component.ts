@@ -3,15 +3,17 @@ import {
   Component,
   Input,
   Output,
-  ElementRef,
   ViewChild,
-  Optional,
   EventEmitter,
   NgZone,
   forwardRef,
-  Renderer,
+  QueryList,
+  AfterViewInit,
+  ContentChildren
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import {CKButtonDirective} from "./ckbutton.directive";
+import {CKGroupDirective} from "./ckgroup.directive";
 
 declare var CKEDITOR:any;
 
@@ -31,7 +33,7 @@ declare var CKEDITOR:any;
   ],
   template: `<textarea #host></textarea>`,
 })
-export class CKEditorComponent {
+export class CKEditorComponent implements AfterViewInit{
 
   @Input() config;
   @Input() debounce;
@@ -41,6 +43,8 @@ export class CKEditorComponent {
   @Output() blur = new EventEmitter();
   @Output() focus = new EventEmitter();
   @ViewChild('host') host;
+  @ContentChildren(CKButtonDirective) toolbarButtons: QueryList<CKButtonDirective>;
+  @ContentChildren(CKGroupDirective) toolbarGroups: QueryList<CKGroupDirective>;
 
   _value = '';
   instance;
@@ -52,6 +56,7 @@ export class CKEditorComponent {
    */
   constructor(zone:NgZone) {
     this.zone = zone;
+
   }
 
   get value(): any { return this._value; };
@@ -81,6 +86,7 @@ export class CKEditorComponent {
   ngAfterViewInit() {
     // Configuration
     this.ckeditorInit(this.config || {});
+
   }
 
   /**
@@ -130,7 +136,7 @@ export class CKEditorComponent {
             this.debounceTimeout = null;
           }, parseInt(this.debounce));
 
-        // Live update
+          // Live update
         }else {
           this.updateValue(value);
         }
@@ -145,6 +151,16 @@ export class CKEditorComponent {
       this.instance.on('focus', (evt) => {
         this.focus.emit(evt);
       });
+
+      // Add Toolbar Groups to Editor. This will also add Buttons within groups.
+      this.toolbarGroups.forEach((group)=>{
+        group.initialize(this)
+      });
+      // Add Toolbar Buttons to Editor.
+      this.toolbarButtons.forEach((button) => {
+        button.initialize(this);
+      });
+
     }
   }
 
