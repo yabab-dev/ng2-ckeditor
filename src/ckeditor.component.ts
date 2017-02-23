@@ -12,8 +12,9 @@ import {
   ContentChildren
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import {CKButtonDirective} from "./ckbutton.directive";
-import {CKGroupDirective} from "./ckgroup.directive";
+
+import { CKButtonDirective } from "./ckbutton.directive";
+import { CKGroupDirective } from "./ckgroup.directive";
 
 declare var CKEDITOR:any;
 

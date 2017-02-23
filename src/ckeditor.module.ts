@@ -13,10 +13,14 @@ import { CKGroupDirective } from './ckgroup.directive';
     CommonModule
   ],
   declarations: [
-    CKEditorComponent,CKButtonDirective,CKGroupDirective
+    CKEditorComponent,
+    CKButtonDirective,
+    CKGroupDirective
   ],
   exports: [
-    CKEditorComponent,CKButtonDirective,CKGroupDirective
+    CKEditorComponent,
+    CKButtonDirective,
+    CKGroupDirective
   ]
 })
 export class CKEditorModule { }
