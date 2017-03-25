@@ -26,24 +26,25 @@
   },
   "homepage": "https://github.com/chymz/ng2-ckeditor#readme",
   "devDependencies": {
-    "@angular/common": "^2.1.0",
-    "@angular/compiler": "^2.1.0",
-    "@angular/compiler-cli": "^2.1.0",
-    "@angular/core": "^2.1.0",
-    "@angular/forms": "^2.1.0",
-    "@angular/platform-browser": "^2.1.0",
-    "@angular/platform-server": "^2.1.0",
+    "@angular/common": "^2.1.0 || ^4.0.0",
+    "@angular/compiler": "^2.1.0 || ^4.0.0",
+    "@angular/compiler-cli": "^2.1.0 || ^4.0.0",
+    "@angular/core": "^2.1.0 || ^4.0.0",
+    "@angular/forms": "^2.1.0 || ^4.0.0",
+    "@angular/platform-browser": "^2.1.0 || ^4.0.0",
+    "@angular/platform-server": "^2.1.0  || ^4.0.0",
+    "@angular/animations": "^4.0.0",
     "@types/ckeditor": "0.0.33",
     "@types/core-js": "^0.9.34",
     "@types/node": "^6.0.45",
-    "rxjs": "5.0.0-beta.12",
-    "typescript": "^2.0.3",
-    "zone.js": "^0.6.26"
+    "rxjs": "5.2.0",
+    "typescript": "^2.2.1",
+    "zone.js": "^0.8.5"
   },
   "peerDependencies": {
-    "@angular/core": "^2.1.0",
-    "@angular/forms": "^2.1.0",
-    "@angular/common": "^2.1.0"
+    "@angular/core": "^2.1.0 || ^4.0.0",
+    "@angular/forms": "^2.1.0 || ^4.0.0",
+    "@angular/common": "^2.1.0 || ^4.0.0"
   },
   "dependencies": { }
 }
