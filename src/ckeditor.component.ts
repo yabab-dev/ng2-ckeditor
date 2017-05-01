@@ -75,6 +75,7 @@ export class CKEditorComponent implements AfterViewInit {
     if (this.instance) {
       setTimeout(() => {
         this.instance.removeAllListeners();
+        CKEDITOR.instances[this.instance.name].destroy();
         this.instance.destroy();
         this.instance = null;
       });
