@@ -34,23 +34,23 @@ declare var CKEDITOR:any;
   ],
   template: `<textarea #host></textarea>`,
 })
-export class CKEditorComponent implements AfterViewInit{
+export class CKEditorComponent implements AfterViewInit {
 
-  @Input() config;
-  @Input() debounce;
+  @Input() config: any;
+  @Input() debounce: string;
 
   @Output() change = new EventEmitter();
   @Output() ready = new EventEmitter();
   @Output() blur = new EventEmitter();
   @Output() focus = new EventEmitter();
-  @ViewChild('host') host;
+  @ViewChild('host') host: any;
   @ContentChildren(CKButtonDirective) toolbarButtons: QueryList<CKButtonDirective>;
   @ContentChildren(CKGroupDirective) toolbarGroups: QueryList<CKGroupDirective>;
 
   _value = '';
-  instance;
-  debounceTimeout;
-  zone;
+  instance: any;
+  debounceTimeout: any;
+  zone: NgZone;
 
   /**
    * Constructor
@@ -93,7 +93,7 @@ export class CKEditorComponent implements AfterViewInit{
   /**
    * Value update process
    */
-  updateValue(value) {
+  updateValue(value: any) {
     this.zone.run(() => {
       this.value = value;
 
@@ -107,7 +107,7 @@ export class CKEditorComponent implements AfterViewInit{
   /**
    * CKEditor init
    */
-  ckeditorInit(config) {
+  ckeditorInit(config: object) {
     if (typeof CKEDITOR == 'undefined') {
       console.warn('CKEditor 4.x is missing (http://ckeditor.com/)');
 
@@ -119,7 +119,7 @@ export class CKEditorComponent implements AfterViewInit{
       this.instance.setData(this.value);
 
       // listen for instanceReady event
-      this.instance.on('instanceReady', (evt) => {
+      this.instance.on('instanceReady', (evt: any) => {
         // send the evt to the EventEmitter
         this.ready.emit(evt);
       });
@@ -144,12 +144,12 @@ export class CKEditorComponent implements AfterViewInit{
       });
 
       // CKEditor blur event
-      this.instance.on('blur', (evt) => {
+      this.instance.on('blur', (evt: any) => {
         this.blur.emit(evt);
       });
 
       // CKEditor focus event
-      this.instance.on('focus', (evt) => {
+      this.instance.on('focus', (evt: any) => {
         this.focus.emit(evt);
       });
 
@@ -168,13 +168,13 @@ export class CKEditorComponent implements AfterViewInit{
   /**
    * Implements ControlValueAccessor
    */
-  writeValue(value) {
+  writeValue(value: any) {
     this._value = value;
     if (this.instance)
       this.instance.setData(value);
   }
-  onChange(_) {}
+  onChange(_: any) {}
   onTouched() {}
-  registerOnChange(fn) { this.onChange = fn; }
-  registerOnTouched(fn) { this.onTouched = fn; }
+  registerOnChange(fn: any) { this.onChange = fn; }
+  registerOnTouched(fn: any) { this.onTouched = fn; }
 }
