@@ -22,10 +22,10 @@ export class CKButtonDirective implements OnInit {
   @Input() name: string;
   @Input() icon: string;
 
-  public initialize(editor:CKEditorComponent){
+  public initialize(editor:CKEditorComponent) {
 
     editor.instance.addCommand(this.command, {
-      exec: (evt:any)=>{
+      exec: (evt:any) => {
         this.click.emit(evt);
       }
     });
@@ -40,8 +40,8 @@ export class CKButtonDirective implements OnInit {
   }
 
   ngOnInit(): void {
-    if(!this.name) throw new Error("Attribute 'name' is required on <ckbutton>");
-    if(!this.command) throw new Error("Attribute 'command' is required on <ckbutton>");
+    if (!this.name) throw new Error("Attribute 'name' is required on <ckbutton>");
+    if (!this.command) throw new Error("Attribute 'command' is required on <ckbutton>");
   }
 
 }

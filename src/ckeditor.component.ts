@@ -60,7 +60,7 @@ export class CKEditorComponent implements AfterViewInit {
 
   }
 
-  get value(): any { return this._value; };
+  get value(): any { return this._value; }
   @Input() set value(v) {
     if (v !== this._value) {
       this._value = v;
@@ -109,7 +109,7 @@ export class CKEditorComponent implements AfterViewInit {
    * CKEditor init
    */
   ckeditorInit(config: object) {
-    if (typeof CKEDITOR == 'undefined') {
+    if (typeof CKEDITOR === 'undefined') {
       console.warn('CKEditor 4.x is missing (http://ckeditor.com/)');
 
     } else {
@@ -155,8 +155,8 @@ export class CKEditorComponent implements AfterViewInit {
       });
 
       // Add Toolbar Groups to Editor. This will also add Buttons within groups.
-      this.toolbarGroups.forEach((group)=>{
-        group.initialize(this)
+      this.toolbarGroups.forEach((group) => {
+        group.initialize(this);
       });
       // Add Toolbar Buttons to Editor.
       this.toolbarButtons.forEach((button) => {
