@@ -108,7 +108,7 @@ export class CKEditorComponent implements AfterViewInit {
   /**
    * CKEditor init
    */
-  ckeditorInit(config: object) {
+  ckeditorInit(config: any) {
     if (typeof CKEDITOR === 'undefined') {
       console.warn('CKEditor 4.x is missing (http://ckeditor.com/)');
 
