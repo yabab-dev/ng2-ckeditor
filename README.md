@@ -60,6 +60,7 @@ import { Component } from '@angular/core';
   <ckeditor
     [(ngModel)]="ckeditorContent"
     [config]="{uiColor: '#99000'}"
+    [readonly]="false"
     (change)="onChange($event)"
     (ready)="onReady($event)"
     (focus)="onFocus($event)"
@@ -79,6 +80,7 @@ export class Sample{
 
 * `config` : The configuration object for CKEditor see http://docs.ckeditor.com/#!/api/CKEDITOR.config
 * `debounce` : You can add a delay (ms) when updating ngModel
+* `readonly` : Enabled / disable readonly on editor
 
 ### <a name="toolbar"></a>Toolbar Directives
 
