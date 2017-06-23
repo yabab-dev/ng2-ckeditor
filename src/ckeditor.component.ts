@@ -9,7 +9,9 @@ import {
   forwardRef,
   QueryList,
   AfterViewInit,
-  ContentChildren
+  ContentChildren,
+  SimpleChanges,
+  OnChanges
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -34,9 +36,10 @@ declare var CKEDITOR:any;
   ],
   template: `<textarea #host></textarea>`,
 })
-export class CKEditorComponent implements AfterViewInit {
+export class CKEditorComponent implements OnChanges, AfterViewInit {
 
   @Input() config: any;
+  @Input() readonly: boolean;
   @Input() debounce: string;
 
   @Output() change = new EventEmitter();
@@ -65,6 +68,12 @@ export class CKEditorComponent implements AfterViewInit {
     if (v !== this._value) {
       this._value = v;
       this.onChange(v);
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.readonly && this.instance) {
+      this.instance.setReadOnly(changes.readonly.currentValue);
     }
   }
 
@@ -113,6 +122,9 @@ export class CKEditorComponent implements AfterViewInit {
       console.warn('CKEditor 4.x is missing (http://ckeditor.com/)');
 
     } else {
+      if (this.readonly) {
+        config.readOnly = this.readonly;
+      }
       // CKEditor replace textarea
       this.instance = CKEDITOR.replace(this.host.nativeElement, config);
 
