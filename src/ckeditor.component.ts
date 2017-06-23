@@ -95,9 +95,14 @@ export class CKEditorComponent implements OnChanges, AfterViewInit {
    * On component view init
    */
   ngAfterViewInit() {
-    // Configuration
     this.ckeditorInit(this.config || {});
+  }
 
+  /**
+   * On component view checked
+   */
+  ngAfterViewChecked() {
+    this.ckeditorInit(this.config || {});
   }
 
   /**
@@ -122,6 +127,12 @@ export class CKEditorComponent implements OnChanges, AfterViewInit {
       console.warn('CKEditor 4.x is missing (http://ckeditor.com/)');
 
     } else {
+
+      // Check textarea exists
+      if (this.instance || !document.contains(this.host.nativeElement)) {
+        return;
+      }
+
       if (this.readonly) {
         config.readOnly = this.readonly;
       }
