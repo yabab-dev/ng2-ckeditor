@@ -23,5 +23,5 @@
   ],
   "exclude": [
     "node_modules"
-  ],
+  ]
 }

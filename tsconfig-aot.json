@@ -21,9 +21,8 @@
     "node_modules"
   ],
   "angularCompilerOptions": {
-    "genDir": "aot",
-    "skipMetadataEmit": true,
+    "skipMetadataEmit": false,
     "skipTemplateCodegen": true,
-    "debug": true
+    "annotationsAs": "decorators"
   }
 }
