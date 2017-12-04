@@ -11,18 +11,19 @@
     "removeComments": false,
     "noImplicitAny": false,
     "outDir": "lib",
-    "declaration": true
+    "declaration": true,
+    "rootDir": "."
   },
-  "include": [
-    "src/**/*"
+  "files": [
+    "ng2-ckeditor.ts"
   ],
   "exclude": [
-    "node_modules",
-    "**/*.spec.ts"
+    "node_modules"
   ],
-
   "angularCompilerOptions": {
     "genDir": "aot",
-    "skipMetadataEmit" : false
+    "skipMetadataEmit": true,
+    "skipTemplateCodegen": true,
+    "debug": true
   }
 }

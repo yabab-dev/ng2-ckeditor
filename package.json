@@ -2,11 +2,11 @@
   "name": "ng2-ckeditor",
   "version": "1.1.10",
   "description": "Angular2 CKEditor component",
-  "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
+  "main": "lib/ng2-ckeditor.js",
+  "typings": "lib/ng2-ckeditor.d.ts",
   "scripts": {
     "prepublishOnly": "npm run build",
-    "build": "node_modules/.bin/ngc -p tsconfig-aot.json"
+    "build": "ngc -p tsconfig-aot.json"
   },
   "keywords": [
     "angular",

@@ -1,7 +1,10 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "lib": ["es2017", "dom"],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
     "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",
@@ -11,13 +14,14 @@
     "removeComments": false,
     "noImplicitAny": false,
     "outDir": "lib",
-    "declaration": true
+    "declaration": true,
+    "rootDir": "."
   },
   "include": [
+    "ng2-ckeditor.ts",
     "src/**/*"
   ],
   "exclude": [
-    "node_modules",
-    "**/*.spec.ts"
-  ]
+    "node_modules"
+  ],
 }
