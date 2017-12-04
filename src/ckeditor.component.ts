@@ -46,21 +46,22 @@ export class CKEditorComponent implements OnChanges, AfterViewInit {
   @Output() ready = new EventEmitter();
   @Output() blur = new EventEmitter();
   @Output() focus = new EventEmitter();
+
   @ViewChild('host') host: any;
+
   @ContentChildren(CKButtonDirective) toolbarButtons: QueryList<CKButtonDirective>;
   @ContentChildren(CKGroupDirective) toolbarGroups: QueryList<CKGroupDirective>;
 
   _value = '';
   instance: any;
   debounceTimeout: any;
-  zone: NgZone;
 
   /**
    * Constructor
    */
-  constructor(zone:NgZone) {
-    this.zone = zone;
-
+  constructor(
+    private zone:NgZone
+  ) {
   }
 
   get value(): any { return this._value; }
@@ -162,7 +163,7 @@ export class CKEditorComponent implements OnChanges, AfterViewInit {
           }, parseInt(this.debounce));
 
           // Live update
-        }else {
+        } else {
           this.updateValue(value);
         }
       });

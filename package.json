@@ -1,6 +1,6 @@
 {
   "name": "ng2-ckeditor",
-  "version": "1.1.11",
+  "version": "1.1.12",
   "description": "Angular2 CKEditor component",
   "main": "lib/ng2-ckeditor.js",
   "typings": "lib/ng2-ckeditor.d.ts",
@@ -37,9 +37,9 @@
     "@types/ckeditor": "0.0.45",
     "@types/core-js": "^0.9.43",
     "@types/node": "^8.0.54",
-    "rxjs": "5.5.3",
+    "rxjs": "^5.5.2",
     "typescript": "^2.6.2",
-    "zone.js": "^0.8.18"
+    "zone.js": "^0.8.14"
   },
   "peerDependencies": {
     "@angular/core": "^5.0.5",
