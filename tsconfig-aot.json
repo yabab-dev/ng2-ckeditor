@@ -21,8 +21,8 @@
     "node_modules"
   ],
   "angularCompilerOptions": {
-    "skipMetadataEmit": true,
-    "skipTemplateCodegen": true,
+    "skipMetadataEmit": false,
+    "skipTemplateCodegen": false,
     "annotationsAs": "decorators"
   }
 }
