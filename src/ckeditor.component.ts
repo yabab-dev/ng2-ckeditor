@@ -15,10 +15,10 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { CKButtonDirective } from "./ckbutton.directive";
-import { CKGroupDirective } from "./ckgroup.directive";
+import { CKButtonDirective } from './ckbutton.directive';
+import { CKGroupDirective } from './ckgroup.directive';
 
-declare var CKEDITOR:any;
+declare var CKEDITOR: any;
 
 /**
  * CKEditor component
@@ -34,10 +34,9 @@ declare var CKEDITOR:any;
       multi: true
     }
   ],
-  template: `<textarea #host></textarea>`,
+  template: `<textarea #host></textarea>`
 })
 export class CKEditorComponent implements OnChanges, AfterViewInit {
-
   @Input() config: any;
   @Input() readonly: boolean;
   @Input() debounce: string;
@@ -59,13 +58,13 @@ export class CKEditorComponent implements OnChanges, AfterViewInit {
   /**
    * Constructor
    */
-  constructor(
-    private zone:NgZone
-  ) {
-  }
+  constructor(private zone: NgZone) {}
 
-  get value(): any { return this._value; }
-  @Input() set value(v) {
+  get value(): any {
+    return this._value;
+  }
+  @Input()
+  set value(v) {
     if (v !== this._value) {
       this._value = v;
       this.onChange(v);
@@ -126,11 +125,9 @@ export class CKEditorComponent implements OnChanges, AfterViewInit {
   ckeditorInit(config: any) {
     if (typeof CKEDITOR === 'undefined') {
       console.warn('CKEditor 4.x is missing (http://ckeditor.com/)');
-
     } else {
-
       // Check textarea exists
-      if (this.instance || !document.contains(this.host.nativeElement)) {
+      if (this.instance || !this.documentContains(this.host.nativeElement)) {
         return;
       }
 
@@ -179,14 +176,13 @@ export class CKEditorComponent implements OnChanges, AfterViewInit {
       });
 
       // Add Toolbar Groups to Editor. This will also add Buttons within groups.
-      this.toolbarGroups.forEach((group) => {
+      this.toolbarGroups.forEach(group => {
         group.initialize(this);
       });
       // Add Toolbar Buttons to Editor.
-      this.toolbarButtons.forEach((button) => {
+      this.toolbarButtons.forEach(button => {
         button.initialize(this);
       });
-
     }
   }
 
@@ -195,11 +191,18 @@ export class CKEditorComponent implements OnChanges, AfterViewInit {
    */
   writeValue(value: any) {
     this._value = value;
-    if (this.instance)
-      this.instance.setData(value);
+    if (this.instance) this.instance.setData(value);
   }
   onChange(_: any) {}
   onTouched() {}
-  registerOnChange(fn: any) { this.onChange = fn; }
-  registerOnTouched(fn: any) { this.onTouched = fn; }
+  registerOnChange(fn: any) {
+    this.onChange = fn;
+  }
+  registerOnTouched(fn: any) {
+    this.onTouched = fn;
+  }
+
+  private documentContains(node: Node) {
+    return document.contains ? document.contains(node) : document.body.contains(node);
+  }
 }
