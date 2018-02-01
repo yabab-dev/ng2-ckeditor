@@ -46,6 +46,7 @@ export class CKEditorComponent implements OnChanges, AfterViewInit {
   @Output() blur = new EventEmitter();
   @Output() focus = new EventEmitter();
   @Output() contentDom = new EventEmitter();
+  @Output() fileUploadRequest = new EventEmitter();
 
   @ViewChild('host') host: any;
 
@@ -182,6 +183,11 @@ export class CKEditorComponent implements OnChanges, AfterViewInit {
       // CKEditor contentDom event
       this.instance.on('contentDom', (evt: any) => {
         this.contentDom.emit(evt);
+      });
+
+      // CKEditor fileUploadRequest event
+      this.instance.on('fileUploadRequest', (evt: any) => {
+        this.fileUploadRequest.emit(evt);
       });
 
       // Add Toolbar Groups to Editor. This will also add Buttons within groups.
