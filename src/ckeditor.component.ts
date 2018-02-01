@@ -14,7 +14,6 @@ import {
   OnChanges,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-
 import { CKButtonDirective } from './ckbutton.directive';
 import { CKGroupDirective } from './ckgroup.directive';
 
@@ -42,6 +41,7 @@ export class CKEditorComponent implements OnChanges, AfterViewInit {
   @Input() debounce: string;
 
   @Output() change = new EventEmitter();
+  @Output() editorChange = new EventEmitter();
   @Output() ready = new EventEmitter();
   @Output() blur = new EventEmitter();
   @Output() focus = new EventEmitter();
@@ -148,7 +148,7 @@ export class CKEditorComponent implements OnChanges, AfterViewInit {
       });
 
       // CKEditor change event
-      this.instance.on('change', () => {
+      this.instance.on('change', (evt: any) => {
         this.onTouched();
         let value = this.instance.getData();
 
@@ -164,6 +164,9 @@ export class CKEditorComponent implements OnChanges, AfterViewInit {
         } else {
           this.updateValue(value);
         }
+
+        // Original ckeditor event dispatch
+        this.editorChange.emit(evt);
       });
 
       // CKEditor blur event
