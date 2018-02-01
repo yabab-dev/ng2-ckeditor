@@ -9,18 +9,8 @@ import { CKGroupDirective } from './ckgroup.directive';
  * CKEditorModule
  */
 @NgModule({
-  imports: [
-    CommonModule
-  ],
-  declarations: [
-    CKEditorComponent,
-    CKButtonDirective,
-    CKGroupDirective
-  ],
-  exports: [
-    CKEditorComponent,
-    CKButtonDirective,
-    CKGroupDirective
-  ]
+  imports: [CommonModule],
+  declarations: [CKEditorComponent, CKButtonDirective, CKGroupDirective],
+  exports: [CKEditorComponent, CKButtonDirective, CKGroupDirective],
 })
-export class CKEditorModule { }
+export class CKEditorModule {}

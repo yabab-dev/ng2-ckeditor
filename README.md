@@ -1,6 +1,6 @@
 # Angular - CKEditor component
 
-Use the [CKEditor (4.x)](http://ckeditor.com/) wysiwyg in your Angular (v2 and v4) application.
+Use the [CKEditor (4.x)](http://ckeditor.com/) wysiwyg in your Angular application.
 
 **Demo** : https://embed.plnkr.co/hnB0R3/
 
@@ -22,14 +22,14 @@ Use the [CKEditor (4.x)](http://ckeditor.com/) wysiwyg in your Angular (v2 and v
 ```javascript
 System.config({
   map: {
-    "ng2-ckeditor": "npm:ng2-ckeditor"
+    'ng2-ckeditor': 'npm:ng2-ckeditor',
   },
   packages: {
-    "ng2-ckeditor": {
-      main: "lib/index.js",
-      defaultExtension: "js"
-    }
-  }
+    'ng2-ckeditor': {
+      main: 'lib/index.js',
+      defaultExtension: 'js',
+    },
+  },
 });
 ```
 
@@ -40,11 +40,11 @@ System.config({
 Include `CKEditorModule` in your main module :
 
 ```javascript
-import { CKEditorModule } from "ng2-ckeditor";
+import { CKEditorModule } from 'ng2-ckeditor';
 
 @NgModule({
   // ...
-  imports: [CKEditorModule]
+  imports: [CKEditorModule],
   // ...
 })
 export class AppModule {}
@@ -53,10 +53,10 @@ export class AppModule {}
 Then use it in your component :
 
 ```javascript
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 
 @Component({
-  selector: "sample",
+  selector: 'sample',
   template: `
   <ckeditor
     [(ngModel)]="ckeditorContent"
@@ -69,10 +69,10 @@ import { Component } from "@angular/core";
     (contentDom)="onContentDom($event)"
     debounce="500">
   </ckeditor>
-  `
+  `,
 })
 export class Sample {
-  ckeditorContent: string = "<p>Some html</p>";
+  ckeditorContent: string = '<p>Some html</p>';
 }
 ```
 

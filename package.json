@@ -1,20 +1,17 @@
 {
   "name": "ng2-ckeditor",
   "version": "1.1.14",
-  "description": "Angular2 CKEditor component",
+  "description": "Angular CKEditor component",
   "main": "lib/ng2-ckeditor.js",
   "typings": "lib/ng2-ckeditor.d.ts",
   "scripts": {
     "prepublishOnly": "npm run build",
-    "build": "ngc -p tsconfig-aot.json"
+    "build": "ngc -p tsconfig-aot.json",
+    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "prettier": "prettier --ignore-path .gitignore --write ./**/*.ts",
+    "precommit": "npm run prettier && npm run lint"
   },
-  "keywords": [
-    "angular",
-    "angular2",
-    "component",
-    "ckeditor",
-    "wysiwyg"
-  ],
+  "keywords": ["angular", "angular2", "component", "ckeditor", "wysiwyg"],
   "author": "Simon Babay",
   "license": "MIT",
   "repository": {
@@ -26,6 +23,7 @@
   },
   "homepage": "https://github.com/chymz/ng2-ckeditor#readme",
   "devDependencies": {
+    "@angular/animations": "^5.0.5",
     "@angular/common": "^5.0.5",
     "@angular/compiler": "^5.0.5",
     "@angular/compiler-cli": "^5.0.5",
@@ -33,11 +31,12 @@
     "@angular/forms": "^5.0.5",
     "@angular/platform-browser": "^5.0.5",
     "@angular/platform-server": "^5.0.5",
-    "@angular/animations": "^5.0.5",
     "@types/ckeditor": "0.0.45",
     "@types/core-js": "^0.9.43",
     "@types/node": "^8.0.54",
+    "prettier": "^1.10.2",
     "rxjs": "^5.5.2",
+    "tslint": "^5.9.1",
     "typescript": "^2.6.2",
     "zone.js": "^0.8.14"
   },

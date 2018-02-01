@@ -11,7 +11,7 @@ import {
   AfterViewInit,
   ContentChildren,
   SimpleChanges,
-  OnChanges
+  OnChanges,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -31,10 +31,10 @@ declare var CKEDITOR: any;
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => CKEditorComponent),
-      multi: true
-    }
+      multi: true,
+    },
   ],
-  template: `<textarea #host></textarea>`
+  template: `<textarea #host></textarea>`,
 })
 export class CKEditorComponent implements OnChanges, AfterViewInit {
   @Input() config: any;
@@ -180,7 +180,7 @@ export class CKEditorComponent implements OnChanges, AfterViewInit {
       this.instance.on('contentDom', (evt: any) => {
         this.contentDom.emit(evt);
       });
-      
+
       // Add Toolbar Groups to Editor. This will also add Buttons within groups.
       this.toolbarGroups.forEach(group => {
         group.initialize(this);
