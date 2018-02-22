@@ -60,7 +60,7 @@ export class CKEditorComponent implements OnChanges, AfterViewInit {
   /**
    * Constructor
    */
-  constructor(private zone: NgZone) {}
+  constructor(private zone: NgZone) { }
 
   get value(): any {
     return this._value;
@@ -153,17 +153,19 @@ export class CKEditorComponent implements OnChanges, AfterViewInit {
         this.onTouched();
         let value = this.instance.getData();
 
-        // Debounce update
-        if (this.debounce) {
-          if (this.debounceTimeout) clearTimeout(this.debounceTimeout);
-          this.debounceTimeout = setTimeout(() => {
-            this.updateValue(value);
-            this.debounceTimeout = null;
-          }, parseInt(this.debounce));
+        if (this.value !== value) {
+          // Debounce update
+          if (this.debounce) {
+            if (this.debounceTimeout) clearTimeout(this.debounceTimeout);
+            this.debounceTimeout = setTimeout(() => {
+              this.updateValue(value);
+              this.debounceTimeout = null;
+            }, parseInt(this.debounce));
 
-          // Live update
-        } else {
-          this.updateValue(value);
+            // Live update
+          } else {
+            this.updateValue(value);
+          }
         }
 
         // Original ckeditor event dispatch
@@ -208,8 +210,8 @@ export class CKEditorComponent implements OnChanges, AfterViewInit {
     this._value = value;
     if (this.instance) this.instance.setData(value);
   }
-  onChange(_: any) {}
-  onTouched() {}
+  onChange(_: any) { }
+  onTouched() { }
   registerOnChange(fn: any) {
     this.onChange = fn;
   }
