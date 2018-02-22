@@ -60,7 +60,7 @@ export class CKEditorComponent implements OnChanges, AfterViewInit {
   /**
    * Constructor
    */
-  constructor(private zone: NgZone) { }
+  constructor(private zone: NgZone) {}
 
   get value(): any {
     return this._value;
@@ -216,8 +216,8 @@ export class CKEditorComponent implements OnChanges, AfterViewInit {
     this._value = value;
     if (this.instance) this.instance.setData(value);
   }
-  onChange(_: any) { }
-  onTouched() { }
+  onChange(_: any) {}
+  onTouched() {}
   registerOnChange(fn: any) {
     this.onChange = fn;
   }
