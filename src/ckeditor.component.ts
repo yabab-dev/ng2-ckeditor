@@ -144,6 +144,12 @@ export class CKEditorComponent implements OnChanges, AfterViewInit {
 
       // listen for instanceReady event
       this.instance.on('instanceReady', (evt: any) => {
+        // if value has changed while instance loading
+        // update instance with current component value
+        if (this.instance.getData() !== this.value) {
+          this.instance.setData(this.value);
+        }
+
         // send the evt to the EventEmitter
         this.ready.emit(evt);
       });
