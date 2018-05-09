@@ -2,7 +2,7 @@
 
 Use the [CKEditor (4.x)](http://ckeditor.com/) wysiwyg in your Angular application.
 
-**Demo** : https://embed.plnkr.co/hnB0R3/
+[**Demo**](https://stackblitz.com/edit/ng2-ckeditor)
 
 ### <a name="install"></a>Installation
 
