@@ -16,6 +16,7 @@ Use the [CKEditor (4.x)](http://ckeditor.com/) wysiwyg in your Angular applicati
 
   * JSPM : `jspm install npm:ng2-ckeditor`
   * NPM : `npm install ng2-ckeditor`
+  * YARN: `yarn add ng2-ckeditor`
 
 * SystemJS Config :
 
@@ -69,6 +70,7 @@ import { Component } from '@angular/core';
     (blur)="onBlur($event)"
     (contentDom)="onContentDom($event)"
     (fileUploadRequest)="onFileUploadRequest($event)"
+    (fileUploadResponse)="onFileUploadResponse($event)
     debounce="500">
   </ckeditor>
   `,
