@@ -48,6 +48,8 @@ export class CKEditorComponent implements OnChanges, AfterViewInit {
   @Output() contentDom = new EventEmitter();
   @Output() fileUploadRequest = new EventEmitter();
   @Output() fileUploadResponse = new EventEmitter();
+  @Output() paste = new EventEmitter();
+  @Output() drop = new EventEmitter();
 
   @ViewChild('host') host: any;
 
@@ -202,6 +204,16 @@ export class CKEditorComponent implements OnChanges, AfterViewInit {
       // CKEditor fileUploadResponse event
       this.instance.on('fileUploadResponse', (evt: any) => {
         this.fileUploadResponse.emit(evt);
+      });
+
+      // CKEditor paste event
+      this.instance.on('paste', (evt: any) => {
+        this.paste.emit(evt);
+      });
+
+      // CKEditor drop event
+      this.instance.on('drop', (evt: any) => {
+        this.drop.emit(evt);
       });
 
       // Add Toolbar Groups to Editor. This will also add Buttons within groups.

@@ -70,7 +70,9 @@ import { Component } from '@angular/core';
     (blur)="onBlur($event)"
     (contentDom)="onContentDom($event)"
     (fileUploadRequest)="onFileUploadRequest($event)"
-    (fileUploadResponse)="onFileUploadResponse($event)
+    (fileUploadResponse)="onFileUploadResponse($event)"
+    (paste)="onPaste($event)"
+    (drop)="onDrop($event)"
     debounce="500">
   </ckeditor>
   `,
