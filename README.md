@@ -63,6 +63,7 @@ import { Component } from '@angular/core';
     [(ngModel)]="ckeditorContent"
     [config]="{uiColor: '#99000'}"
     [readonly]="false"
+    [initOnClick]="true"
     (change)="onChange($event)"
     (editorChange)="onEditorChange($event)" <!-- CKEditor change event -->
     (ready)="onReady($event)"

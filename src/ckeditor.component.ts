@@ -1,17 +1,18 @@
 // Imports
 import {
-  Component,
-  Input,
-  Output,
-  ViewChild,
-  EventEmitter,
-  NgZone,
-  forwardRef,
-  QueryList,
   AfterViewInit,
+  Component,
   ContentChildren,
-  SimpleChanges,
+  EventEmitter,
+  forwardRef,
+  HostListener,
+  Input,
+  NgZone,
   OnChanges,
+  Output,
+  QueryList,
+  SimpleChanges,
+  ViewChild,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CKButtonDirective } from './ckbutton.directive';
@@ -33,12 +34,28 @@ declare var CKEDITOR: any;
       multi: true,
     },
   ],
-  template: `<textarea #host></textarea>`,
+  template: `
+    <div class="textField" #host contenteditable="true"></div>`,
+  styles: [
+    `
+      .textField {
+        height: 200px;
+        overflow: auto;
+        border: 1px solid darkgrey;
+      }
+
+      .disabled {
+        cursor: not-allowed;
+        background: lightgray;
+      }
+    `,
+  ],
 })
 export class CKEditorComponent implements OnChanges, AfterViewInit {
   @Input() config: any;
   @Input() readonly: boolean;
   @Input() debounce: string;
+  @Input() initOnClick = false;
 
   @Output() change = new EventEmitter();
   @Output() editorChange = new EventEmitter();
@@ -59,6 +76,7 @@ export class CKEditorComponent implements OnChanges, AfterViewInit {
   _value = '';
   instance: any;
   debounceTimeout: any;
+  initialized = false;
 
   /**
    * Constructor
@@ -68,6 +86,7 @@ export class CKEditorComponent implements OnChanges, AfterViewInit {
   get value(): any {
     return this._value;
   }
+
   @Input()
   set value(v) {
     if (v !== this._value) {
@@ -79,6 +98,15 @@ export class CKEditorComponent implements OnChanges, AfterViewInit {
   ngOnChanges(changes: SimpleChanges) {
     if (changes.readonly && this.instance) {
       this.instance.setReadOnly(changes.readonly.currentValue);
+    }
+    if (!this.initialized) {
+      if (changes.readonly.currentValue) {
+        this.host.nativeElement.classList.add('disabled');
+        this.host.nativeElement.contentEditable = false;
+      } else {
+        this.host.nativeElement.classList.remove('disabled');
+        this.host.nativeElement.contentEditable = true;
+      }
     }
   }
 
@@ -100,14 +128,29 @@ export class CKEditorComponent implements OnChanges, AfterViewInit {
    * On component view init
    */
   ngAfterViewInit() {
-    this.ckeditorInit(this.config || {});
+    if (!this.initOnClick) {
+      this.ckeditorInit(this.config || {});
+    } else {
+      this.textAreaInit(this.config || {});
+    }
   }
 
   /**
    * On component view checked
    */
   ngAfterViewChecked() {
-    this.ckeditorInit(this.config || {});
+    if (!this.initOnClick) {
+      this.ckeditorInit(this.config || {});
+    } else {
+      this.textAreaInit(this.config || {});
+    }
+  }
+
+  @HostListener('click')
+  onClick() {
+    if (this.initOnClick && !this.initialized && !this.readonly) {
+      this.ckeditorInit(this.config || {});
+    }
   }
 
   /**
@@ -141,6 +184,8 @@ export class CKEditorComponent implements OnChanges, AfterViewInit {
       }
       // CKEditor replace textarea
       this.instance = CKEDITOR.replace(this.host.nativeElement, config);
+
+      this.initialized = true;
 
       // Set initial value
       this.instance.setData(this.value);
@@ -228,17 +273,42 @@ export class CKEditorComponent implements OnChanges, AfterViewInit {
   }
 
   /**
+   * TextArea init
+   */
+  textAreaInit(config: any) {
+    if (typeof CKEDITOR === 'undefined') {
+      console.warn('CKEditor 4.x is missing (http://ckeditor.com/)');
+    } else {
+      // Check textarea exists
+      if (this.instance || !this.documentContains(this.host.nativeElement)) {
+        return;
+      }
+
+      if (this.readonly) {
+        config.readOnly = this.readonly;
+      }
+
+      this.host.nativeElement.innerHTML = this.value;
+      this.host.nativeElement.disabled = this.readonly;
+    }
+  }
+
+  /**
    * Implements ControlValueAccessor
    */
   writeValue(value: any) {
     this._value = value;
     if (this.instance) this.instance.setData(value);
   }
+
   onChange(_: any) {}
+
   onTouched() {}
+
   registerOnChange(fn: any) {
     this.onChange = fn;
   }
+
   registerOnTouched(fn: any) {
     this.onTouched = fn;
   }
