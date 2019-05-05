@@ -9,7 +9,7 @@ Use the [CKEditor (4.x)](http://ckeditor.com/) wysiwyg in your Angular applicati
 * Include CKEditor javascript files in your application :
 
 ```
-<script src="https://cdn.ckeditor.com/4.5.11/full/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/4.10.1/full/ckeditor.js"></script>
 ```
 
 * Install ng2-ckeditor
@@ -42,10 +42,11 @@ Include `CKEditorModule` in your main module :
 
 ```javascript
 import { CKEditorModule } from 'ng2-ckeditor';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   // ...
-  imports: [CKEditorModule],
+  imports: [CKEditorModule, FormsModule],
   // ...
 })
 export class AppModule {}

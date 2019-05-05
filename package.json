@@ -1,6 +1,6 @@
 {
   "name": "ng2-ckeditor",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Angular CKEditor component",
   "main": "lib/ng2-ckeditor.js",
   "typings": "lib/ng2-ckeditor.d.ts",
@@ -11,7 +11,13 @@
     "prettier": "prettier --ignore-path .gitignore --write ./**/*.ts",
     "precommit": "npm run prettier && npm run lint"
   },
-  "keywords": ["angular", "angular2", "component", "ckeditor", "wysiwyg"],
+  "keywords": [
+    "angular",
+    "angular2",
+    "component",
+    "ckeditor",
+    "wysiwyg"
+  ],
   "author": "Simon Babay",
   "license": "MIT",
   "repository": {
