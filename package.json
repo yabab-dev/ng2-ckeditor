@@ -6,7 +6,7 @@
   "typings": "lib/ng2-ckeditor.d.ts",
   "scripts": {
     "prepublishOnly": "npm run build",
-    "build": "ngc -p tsconfig-aot.json",
+    "build": "ng-packagr -p package.json",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "prettier": "prettier --ignore-path .gitignore --write ./**/*.ts",
     "precommit": "npm run prettier && npm run lint"
@@ -40,7 +40,8 @@
     "@types/ckeditor": "0.0.45",
     "@types/core-js": "^0.9.43",
     "@types/node": "^8.0.54",
-    "prettier": "^1.10.2",
+    "ng-packagr": "^5.2.0",
+    "prettier": "^1.17.1",
     "rxjs": "^6.1.0",
     "tslint": "^5.9.1",
     "typescript": ">=3.1.1 <3.2.0",
@@ -51,5 +52,14 @@
     "@angular/forms": "^7.0.0",
     "@angular/common": "^7.0.0"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "ngPackage": {
+    "lib": {
+      "entryFile": "./src/index.ts",
+      "languageLevel": [
+        "dom",
+        "es2017"
+      ]
+    }
+  }
 }
