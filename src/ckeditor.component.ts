@@ -33,7 +33,9 @@ declare var CKEDITOR: any;
       multi: true,
     },
   ],
-  template: `<textarea #host></textarea>`,
+  template: `
+    <textarea #host></textarea>
+  `,
 })
 export class CKEditorComponent implements OnChanges, AfterViewInit {
   @Input() config: any;
