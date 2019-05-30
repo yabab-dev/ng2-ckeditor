@@ -2,7 +2,7 @@
   "name": "ng2-ckeditor",
   "version": "1.2.3",
   "description": "Angular CKEditor component",
-  "main": "lib/ng2-ckeditor.js",
+  "main": "lib/bundles/ng2-ckeditor.umd.min.js",
   "typings": "lib/ng2-ckeditor.d.ts",
   "scripts": {
     "prepublishOnly": "npm run build",
@@ -60,6 +60,7 @@
         "dom",
         "es2017"
       ]
-    }
+    },
+    "dest": "lib"
   }
 }
