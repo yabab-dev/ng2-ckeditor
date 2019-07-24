@@ -48,9 +48,9 @@
     "zone.js": "^0.8.14"
   },
   "peerDependencies": {
-    "@angular/core": "^7.0.0",
-    "@angular/forms": "^7.0.0",
-    "@angular/common": "^7.0.0"
+    "@angular/core": "^8.0.0",
+    "@angular/forms": "^8.0.0",
+    "@angular/common": "^8.0.0"
   },
   "dependencies": {},
   "ngPackage": {
