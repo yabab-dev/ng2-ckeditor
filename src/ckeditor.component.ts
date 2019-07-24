@@ -53,7 +53,7 @@ export class CKEditorComponent implements OnChanges, AfterViewInit {
   @Output() paste = new EventEmitter();
   @Output() drop = new EventEmitter();
 
-  @ViewChild('host', {static:false}) host: any;
+  @ViewChild('host', { static: false }) host: any;
 
   @ContentChildren(CKButtonDirective) toolbarButtons: QueryList<CKButtonDirective>;
   @ContentChildren(CKGroupDirective) toolbarGroups: QueryList<CKGroupDirective>;
