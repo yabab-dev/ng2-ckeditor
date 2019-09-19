@@ -1,6 +1,6 @@
 {
   "name": "ng2-ckeditor",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "Angular CKEditor component",
   "main": "lib/bundles/ng2-ckeditor.umd.min.js",
   "typings": "lib/ng2-ckeditor.d.ts",
@@ -55,11 +55,7 @@
   "dependencies": {},
   "ngPackage": {
     "lib": {
-      "entryFile": "./src/index.ts",
-      "languageLevel": [
-        "dom",
-        "es2017"
-      ]
+      "entryFile": "./src/index.ts"
     },
     "dest": "lib"
   }
