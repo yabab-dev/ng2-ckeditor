@@ -89,14 +89,10 @@ export class CKEditorComponent implements OnChanges, AfterViewInit {
    */
   ngOnDestroy() {
     if (this.instance) {
-      setTimeout(() => {
-        if (this.instance) {
-          this.instance.removeAllListeners();
-          CKEDITOR.instances[this.instance.name].destroy();
-          this.instance.destroy();
-          this.instance = null;
-        }
-      });
+      this.instance.removeAllListeners();
+      CKEDITOR.instances[this.instance.name].destroy();
+      this.instance.destroy();
+      this.instance = null;
     }
   }
 
