@@ -33,9 +33,7 @@ declare var CKEDITOR: any;
       multi: true,
     },
   ],
-  template: `
-    <textarea #host></textarea>
-  `,
+  template: `<textarea #host></textarea>`,
 })
 export class CKEditorComponent implements OnChanges, AfterViewInit {
   @Input() config: any;
@@ -217,11 +215,11 @@ export class CKEditorComponent implements OnChanges, AfterViewInit {
       });
 
       // Add Toolbar Groups to Editor. This will also add Buttons within groups.
-      this.toolbarGroups.forEach(group => {
+      this.toolbarGroups.forEach((group) => {
         group.initialize(this);
       });
       // Add Toolbar Buttons to Editor.
-      this.toolbarButtons.forEach(button => {
+      this.toolbarButtons.forEach((button) => {
         button.initialize(this);
       });
     }

@@ -23,13 +23,13 @@ export class CKGroupDirective implements AfterContentInit {
 
   ngAfterContentInit() {
     // Reconfigure each button's toolbar property within ckgroup to hold its parent's name
-    this.toolbarButtons.forEach(button => (button.toolbar = this.name));
+    this.toolbarButtons.forEach((button) => (button.toolbar = this.name));
   }
 
   public initialize(editor: CKEditorComponent) {
     editor.instance.ui.addToolbarGroup(this.name, this.previous, this.subgroupOf);
     // Initialize each button within ckgroup
-    this.toolbarButtons.forEach(button => {
+    this.toolbarButtons.forEach((button) => {
       button.initialize(editor);
     });
   }
