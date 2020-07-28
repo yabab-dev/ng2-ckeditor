@@ -1,6 +1,6 @@
 {
   "name": "ng2-ckeditor",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "description": "Angular CKEditor component",
   "main": "lib/bundles/ng2-ckeditor.umd.min.js",
   "typings": "lib/ng2-ckeditor.d.ts",
@@ -9,7 +9,8 @@
     "build": "ng-packagr -p package.json",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "prettier": "prettier --ignore-path .gitignore --write ./**/*.ts",
-    "precommit": "npm run prettier && npm run lint"
+    "precommit": "npm run prettier && npm run lint",
+    "pub": "npm run build && cd lib && npm publish"
   },
   "keywords": [
     "angular",
