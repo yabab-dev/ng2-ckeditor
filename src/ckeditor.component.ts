@@ -12,6 +12,7 @@ import {
   ContentChildren,
   SimpleChanges,
   OnChanges,
+  OnDestroy
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CKButtonDirective } from './ckbutton.directive';
@@ -35,7 +36,7 @@ declare var CKEDITOR: any;
   ],
   template: `<textarea #host></textarea>`,
 })
-export class CKEditorComponent implements OnChanges, AfterViewInit {
+export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Input() config: any;
   @Input() readonly: boolean;
   @Input() debounce: string;
@@ -86,12 +87,14 @@ export class CKEditorComponent implements OnChanges, AfterViewInit {
    * On component destroy
    */
   ngOnDestroy() {
-    if (this.instance) {
-      this.instance.removeAllListeners();
-      CKEDITOR.instances[this.instance.name].destroy();
-      this.instance.destroy();
-      this.instance = null;
-    }
+    this.zone.runOutsideAngular( () => {
+      if (this.instance) {
+        CKEDITOR.removeAllListeners();
+        CKEDITOR.instances[this.instance.name].destroy();
+        this.instance.destroy();
+        this.instance = null;
+      }
+    });
   }
 
   /**
