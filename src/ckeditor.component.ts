@@ -60,6 +60,7 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy {
   _value = '';
   instance: any;
   debounceTimeout: any;
+  private destroyed = false;
 
   /**
    * Constructor
@@ -87,10 +88,10 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy {
    * On component destroy
    */
   ngOnDestroy() {
+    this.destroyed = true;
     this.zone.runOutsideAngular( () => {
       if (this.instance) {
         CKEDITOR.removeAllListeners();
-        CKEDITOR.instances[this.instance.name].destroy();
         this.instance.destroy();
         this.instance = null;
       }
@@ -101,6 +102,9 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy {
    * On component view init
    */
   ngAfterViewInit() {
+    if (this.destroyed) {
+      return;
+    }
     this.ckeditorInit(this.config || {});
   }
 
