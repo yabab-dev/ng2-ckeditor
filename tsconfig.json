@@ -12,7 +12,8 @@
     "noImplicitAny": false,
     "outDir": "lib",
     "declaration": true,
-    "rootDir": "."
+    "rootDir": ".",
+    "types": ["ckeditor"]
   },
   "include": ["ng2-ckeditor.ts", "src/**/*"],
   "exclude": ["node_modules"]
