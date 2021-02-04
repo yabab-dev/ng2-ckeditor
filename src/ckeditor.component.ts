@@ -12,13 +12,12 @@ import {
   ContentChildren,
   SimpleChanges,
   OnChanges,
-  OnDestroy
+  OnDestroy,
+  ElementRef
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CKButtonDirective } from './ckbutton.directive';
 import { CKGroupDirective } from './ckgroup.directive';
-
-declare var CKEDITOR: any;
 
 /**
  * CKEditor component
@@ -37,7 +36,7 @@ declare var CKEDITOR: any;
   template: `<textarea #host></textarea>`,
 })
 export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy {
-  @Input() config: any;
+  @Input() config: CKEDITOR.config;
   @Input() readonly: boolean;
   @Input() debounce: string;
 
@@ -52,14 +51,14 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Output() paste = new EventEmitter();
   @Output() drop = new EventEmitter();
 
-  @ViewChild('host', { static: false }) host: any;
+  @ViewChild('host', { static: false }) host: ElementRef<HTMLTextAreaElement>;
 
   @ContentChildren(CKButtonDirective) toolbarButtons: QueryList<CKButtonDirective>;
   @ContentChildren(CKGroupDirective) toolbarGroups: QueryList<CKGroupDirective>;
 
   _value = '';
-  instance: any;
-  debounceTimeout: any;
+  instance: CKEDITOR.editor;
+  debounceTimeout: number;
   private destroyed = false;
 
   /**
@@ -132,7 +131,7 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy {
   /**
    * CKEditor init
    */
-  ckeditorInit(config: any) {
+  ckeditorInit(config: CKEDITOR.config) {
     if (typeof CKEDITOR === 'undefined') {
       console.warn('CKEditor 4.x is missing (http://ckeditor.com/)');
     } else {
