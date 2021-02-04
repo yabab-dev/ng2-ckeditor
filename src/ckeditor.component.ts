@@ -40,16 +40,16 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Input() readonly: boolean;
   @Input() debounce: string;
 
-  @Output() change = new EventEmitter();
-  @Output() editorChange = new EventEmitter();
-  @Output() ready = new EventEmitter();
-  @Output() blur = new EventEmitter();
-  @Output() focus = new EventEmitter();
-  @Output() contentDom = new EventEmitter();
-  @Output() fileUploadRequest = new EventEmitter();
-  @Output() fileUploadResponse = new EventEmitter();
-  @Output() paste = new EventEmitter();
-  @Output() drop = new EventEmitter();
+  @Output() change = new EventEmitter<CKEDITOR.eventInfo>();
+  @Output() editorChange = new EventEmitter<CKEDITOR.eventInfo>();
+  @Output() ready = new EventEmitter<CKEDITOR.eventInfo>();
+  @Output() blur = new EventEmitter<CKEDITOR.eventInfo>();
+  @Output() focus = new EventEmitter<CKEDITOR.eventInfo>();
+  @Output() contentDom = new EventEmitter<CKEDITOR.eventInfo>();
+  @Output() fileUploadRequest = new EventEmitter<CKEDITOR.eventInfo>();
+  @Output() fileUploadResponse = new EventEmitter<CKEDITOR.eventInfo>();
+  @Output() paste = new EventEmitter<CKEDITOR.eventInfo>();
+  @Output() drop = new EventEmitter<CKEDITOR.eventInfo>();
 
   @ViewChild('host', { static: false }) host: ElementRef<HTMLTextAreaElement>;
 
@@ -150,7 +150,7 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy {
       this.instance.setData(this.value);
 
       // listen for instanceReady event
-      this.instance.on('instanceReady', (evt: any) => {
+      this.instance.on('instanceReady', (evt: CKEDITOR.eventInfo) => {
         // if value has changed while instance loading
         // update instance with current component value
         if (this.instance.getData() !== this.value) {
@@ -162,7 +162,7 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy {
       });
 
       // CKEditor change event
-      this.instance.on('change', (evt: any) => {
+      this.instance.on('change', (evt: CKEDITOR.eventInfo) => {
         this.onTouched();
         let value = this.instance.getData();
 
@@ -186,37 +186,37 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy {
       });
 
       // CKEditor blur event
-      this.instance.on('blur', (evt: any) => {
+      this.instance.on('blur', (evt: CKEDITOR.eventInfo) => {
         this.blur.emit(evt);
       });
 
       // CKEditor focus event
-      this.instance.on('focus', (evt: any) => {
+      this.instance.on('focus', (evt: CKEDITOR.eventInfo) => {
         this.focus.emit(evt);
       });
 
       // CKEditor contentDom event
-      this.instance.on('contentDom', (evt: any) => {
+      this.instance.on('contentDom', (evt: CKEDITOR.eventInfo) => {
         this.contentDom.emit(evt);
       });
 
       // CKEditor fileUploadRequest event
-      this.instance.on('fileUploadRequest', (evt: any) => {
+      this.instance.on('fileUploadRequest', (evt: CKEDITOR.eventInfo) => {
         this.fileUploadRequest.emit(evt);
       });
 
       // CKEditor fileUploadResponse event
-      this.instance.on('fileUploadResponse', (evt: any) => {
+      this.instance.on('fileUploadResponse', (evt: CKEDITOR.eventInfo) => {
         this.fileUploadResponse.emit(evt);
       });
 
       // CKEditor paste event
-      this.instance.on('paste', (evt: any) => {
+      this.instance.on('paste', (evt: CKEDITOR.eventInfo) => {
         this.paste.emit(evt);
       });
 
       // CKEditor drop event
-      this.instance.on('drop', (evt: any) => {
+      this.instance.on('drop', (evt: CKEDITOR.eventInfo) => {
         this.drop.emit(evt);
       });
 
