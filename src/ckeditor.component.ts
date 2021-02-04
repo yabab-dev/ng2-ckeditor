@@ -170,7 +170,7 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy {
           // Debounce update
           if (this.debounce) {
             if (this.debounceTimeout) clearTimeout(this.debounceTimeout);
-            this.debounceTimeout = setTimeout(() => {
+            this.debounceTimeout = window.setTimeout(() => {
               this.updateValue(value);
               this.debounceTimeout = null;
             }, parseInt(this.debounce));
