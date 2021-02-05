@@ -25,6 +25,7 @@ export class CKButtonDirective implements OnInit {
     editor.instance.addCommand(this.command, {
       exec: (evt: any) => {
         this.click.emit(evt);
+        return true;
       },
     });
 
