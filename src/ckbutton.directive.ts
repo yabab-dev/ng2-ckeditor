@@ -14,17 +14,17 @@ import { CKEditorComponent } from './ckeditor.component';
   selector: 'ckbutton',
 })
 export class CKButtonDirective implements OnInit {
-  @Output() click = new EventEmitter();
+  @Output() click = new EventEmitter<CKEDITOR.editor>();
   @Input() label: string;
   @Input() command: string;
   @Input() toolbar: string;
   @Input() name: string;
   @Input() icon: string;
 
-  initialize(editor: CKEditorComponent) {
+  public initialize(editor: CKEditorComponent): void {
     editor.instance.addCommand(this.command, {
-      exec: (evt: any) => {
-        this.click.emit(evt);
+      exec: (edit: CKEDITOR.editor): boolean => {
+        this.click.emit(edit);
         return true;
       },
     });
@@ -38,7 +38,11 @@ export class CKButtonDirective implements OnInit {
   }
 
   ngOnInit(): void {
-    if (!this.name) throw new Error('Attribute "name" is required on <ckbutton>');
-    if (!this.command) throw new Error('Attribute "command" is required on <ckbutton>');
+    if (!this.name) {
+      throw new Error('Attribute "name" is required on <ckbutton>');
+    }
+    if (!this.command) {
+      throw new Error('Attribute "command" is required on <ckbutton>');
+    }
   }
 }
