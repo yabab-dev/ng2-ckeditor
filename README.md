@@ -9,7 +9,7 @@ Use the [CKEditor (4.x)](http://ckeditor.com/) wysiwyg in your Angular applicati
 * Include CKEditor javascript files in your application :
 
 ```
-<script src="https://cdn.ckeditor.com/4.14.1/full/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>
 ```
 
 * Install ng2-ckeditor
@@ -17,6 +17,12 @@ Use the [CKEditor (4.x)](http://ckeditor.com/) wysiwyg in your Angular applicati
   * JSPM : `jspm install npm:ng2-ckeditor`
   * NPM : `npm install ng2-ckeditor`
   * YARN: `yarn add ng2-ckeditor`
+
+* Install @types/ckeditor
+
+  * JSPM : `jspm install npm:@types/ckeditor`
+  * NPM : `npm install --save @types/ckeditor`
+  * YARN : `yarn add @types/ckeditor`
 
 * SystemJS Config :
 
