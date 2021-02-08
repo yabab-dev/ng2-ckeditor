@@ -66,18 +66,19 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy {
    */
   constructor(private zone: NgZone) {}
 
-  get value(): any {
+  get value(): string {
     return this._value;
   }
+
   @Input()
-  set value(v) {
+  set value(v: string) {
     if (v !== this._value) {
       this._value = v;
       this.onChange(v);
     }
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: SimpleChanges): void {
     if (changes.readonly && this.instance) {
       this.instance.setReadOnly(changes.readonly.currentValue);
     }
@@ -86,9 +87,9 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy {
   /**
    * On component destroy
    */
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.destroyed = true;
-    this.zone.runOutsideAngular( () => {
+    this.zone.runOutsideAngular(() => {
       if (this.instance) {
         CKEDITOR.removeAllListeners();
         this.instance.destroy();
@@ -100,7 +101,7 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy {
   /**
    * On component view init
    */
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     if (this.destroyed) {
       return;
     }
@@ -110,14 +111,14 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy {
   /**
    * On component view checked
    */
-  ngAfterViewChecked() {
+  ngAfterViewChecked(): void {
     this.ckeditorInit(this.config || {});
   }
 
   /**
    * Value update process
    */
-  updateValue(value: any) {
+  updateValue(value: any): void {
     this.zone.run(() => {
       this.value = value;
 
@@ -131,7 +132,7 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy {
   /**
    * CKEditor init
    */
-  ckeditorInit(config: CKEDITOR.config) {
+  ckeditorInit(config: CKEDITOR.config): void {
     if (typeof CKEDITOR === 'undefined') {
       console.warn('CKEditor 4.x is missing (http://ckeditor.com/)');
     } else {
@@ -164,12 +165,14 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy {
       // CKEditor change event
       this.instance.on('change', (evt: CKEDITOR.eventInfo) => {
         this.onTouched();
-        let value = this.instance.getData();
+        const value = this.instance.getData();
 
         if (this.value !== value) {
           // Debounce update
           if (this.debounce) {
-            if (this.debounceTimeout) clearTimeout(this.debounceTimeout);
+            if (this.debounceTimeout) {
+              clearTimeout(this.debounceTimeout);
+            }
             this.debounceTimeout = window.setTimeout(() => {
               this.updateValue(value);
               this.debounceTimeout = null;
@@ -234,16 +237,20 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy {
   /**
    * Implements ControlValueAccessor
    */
-  writeValue(value: any) {
+  writeValue(value: string): void {
     this._value = value;
     if (this.instance) this.instance.setData(value);
   }
-  onChange(_: any) {}
-  onTouched() {}
-  registerOnChange(fn: any) {
+
+  onChange: (_: string) => void;
+
+  onTouched: () => void;
+
+  registerOnChange(fn: () => void): void {
     this.onChange = fn;
   }
-  registerOnTouched(fn: any) {
+
+  registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
 
