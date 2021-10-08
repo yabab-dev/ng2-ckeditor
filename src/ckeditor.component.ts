@@ -91,7 +91,6 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy {
     this.destroyed = true;
     this.zone.runOutsideAngular(() => {
       if (this.instance) {
-        CKEDITOR.removeAllListeners();
         this.instance.destroy();
         this.instance = null;
       }
