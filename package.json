@@ -2,15 +2,13 @@
   "name": "ng2-ckeditor",
   "version": "1.3.5",
   "description": "Angular CKEditor component",
-  "main": "lib/bundles/ng2-ckeditor.umd.min.js",
-  "typings": "lib/ng2-ckeditor.d.ts",
   "scripts": {
     "prepublishOnly": "npm run build",
     "build": "ng-packagr -p ng-package.json",
     "lint": "eslint -c ./.eslintrc.json ./src/**/*.ts",
     "prettier": "prettier --ignore-path .gitignore --write ./**/*.ts",
     "precommit": "npm run prettier && npm run lint",
-    "pub": "npm run build && cd lib && npm publish"
+    "pub": "npm run build && cd dist && npm publish"
   },
   "keywords": [
     "angular",
