@@ -1,6 +1,6 @@
 {
   "name": "ng2-ckeditor",
-  "version": "1.3.5",
+  "version": "1.3.6",
   "description": "Angular CKEditor component",
   "scripts": {
     "prepublishOnly": "npm run build",
@@ -8,7 +8,7 @@
     "lint": "eslint -c ./.eslintrc.json ./src/**/*.ts",
     "prettier": "prettier --ignore-path .gitignore --write ./**/*.ts",
     "precommit": "npm run prettier && npm run lint",
-    "pub": "npm run build && cd dist && npm publish"
+    "pub": "npm run build && npm publish dist"
   },
   "keywords": [
     "angular",
