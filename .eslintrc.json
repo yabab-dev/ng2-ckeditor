@@ -1,4 +1,5 @@
 {
+    "root": true,
     "env": {
         "browser": true,
         "es2021": true
@@ -24,6 +25,7 @@
         "no-duplicate-imports": "error",
         "brace-style": [
             "error"
-        ]
+        ],
+        "@typescript-eslint/no-explicit-any": "off"
     }
 }
